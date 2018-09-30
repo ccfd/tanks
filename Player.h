@@ -4,7 +4,7 @@
 class Player
 {
 public:
-	Player(void);
+	Player();
 	virtual void Play(double, TankControl*);
-	virtual ~Player(void);
+	virtual ~Player();
 };
