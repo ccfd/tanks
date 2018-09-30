@@ -198,7 +198,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Player.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TankAvatar.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TankControl.cpp"
 				>
 			</File>
 		</Filter>
@@ -228,7 +236,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Player.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TankAvatar.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TankControl.h"
 				>
 			</File>
 		</Filter>

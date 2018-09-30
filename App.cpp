@@ -9,8 +9,8 @@ App::App() : back(resources.back) {
 	    window->setFramerateLimit(24);
 		window->setVerticalSyncEnabled(true);
 		back.scale(gscale,gscale);
-		tanks.push_back(new LiveTank(350,300,0,0));
-		tanks.push_back(new LiveTank(600,300,1,0));
+		tanks.push_back(new LiveTank(new Player(), 350,300,0,0));
+		tanks.push_back(new LiveTank(new Player(), 600,300,1,0));
 	}
 	void App::Draw() {
 		window->draw(back);
