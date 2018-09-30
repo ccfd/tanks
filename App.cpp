@@ -1,6 +1,7 @@
 #include "App.h"
 #include "LiveTank.h"
 #include "Bullet.h"
+#include "KeyboardPlayer.h"
 
 App::App() : back(resources.back) {
 		sf::ContextSettings settings;
@@ -9,7 +10,7 @@ App::App() : back(resources.back) {
 	    window->setFramerateLimit(24);
 		window->setVerticalSyncEnabled(true);
 		back.scale(gscale,gscale);
-		tanks.push_back(new LiveTank(new Player(), 350,300,0,0));
+		tanks.push_back(new LiveTank(new KeyboardPlayer(), 350,300,0,0));
 		tanks.push_back(new LiveTank(new Player(), 600,300,1,0));
 	}
 	void App::Draw() {
@@ -40,6 +41,7 @@ App::App() : back(resources.back) {
 	int App::Run() {
 		while (window->isOpen())
 		{
+
 			sf::Event event;
 			while (window->pollEvent(event))
 			{
@@ -51,6 +53,7 @@ App::App() : back(resources.back) {
 			this->Draw();
 //			this->DrawExtents();
 			window->display();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) window->close();
 		}
 		return EXIT_SUCCESS;
 	}

@@ -46,7 +46,7 @@ LiveTank::~LiveTank() {};
 		if (omh < -1) omh = -1;
 
 		double v = (v1+v2)/2;
-		double om = (v1-v2)/24;
+		double om = (-v1+v2)/24;
 		x +=  sin(rb)*v*dt;
 		y += -cos(rb)*v*dt;
 		rb += om*dt;

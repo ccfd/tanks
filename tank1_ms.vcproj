@@ -186,6 +186,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\KeyboardPlayer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\LiveTank.cpp"
 				>
 			</File>
@@ -225,6 +229,10 @@
 			</File>
 			<File
 				RelativePath=".\Globals.h"
+				>
+			</File>
+			<File
+				RelativePath=".\KeyboardPlayer.h"
 				>
 			</File>
 			<File
