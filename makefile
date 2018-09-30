@@ -1,9 +1,9 @@
 
-main : main.o App.o Bullet.o Globals.o LiveTank.o Object.o TankAvatar.o
+main : main.o App.o Bullet.o Globals.o LiveTank.o Object.o TankAvatar.o Player.o TankControl.o KeyboardPlayer.o
 	g++ -o $@ $^ -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
 
 
 %.o : %.cpp
-	g++ -c -o $@ $<
+	g++ -std=c++0x -c -o $@ $<
 
 
