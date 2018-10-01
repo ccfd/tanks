@@ -17,8 +17,8 @@ void Bullet::Tick(App* app) {
 	x = x + vx*dt;
 	y = y + vy*dt;
 	circle.setPosition(x,y);
-	std::vector<Object*> col = app->GetCollision(this);
-	for (std::vector<Object*>::iterator t = col.begin(); t != col.end(); t++) {
+	App::Objects col = app->GetCollision(this);
+	for (App::Objects::iterator t = col.begin(); t != col.end(); t++) {
 		(*t)->Hit(hp);
 		app->Hit(1.0);
 		Dissapear();

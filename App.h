@@ -5,10 +5,13 @@
 #include <list>
 
 class App {
+public:
+	typedef std::list<Object*> Objects;
+private:
 	sf::RenderWindow* window;
 	sf::Sprite back;
-	typedef std::list<Object*> Tanks;
-	Tanks tanks;
+	Objects objects;
+	Objects bullets;
 	sf::Sound hit;
 public:
 	App();
@@ -17,6 +20,7 @@ public:
 	void Tick();
 	int Run();
 	void AddObject(Object*);
-	std::vector<Object*> GetCollision(Object *);
+	void AddBullet(Object*);
+	Objects GetCollision(Object *);
 	void Hit(float pitch);
 };

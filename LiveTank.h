@@ -3,7 +3,7 @@
 #include "TankAvatar.h"
 #include "Player.h"
 
-const double cannonInterval = 2, gunInterval = 0.2;
+const double cannonInterval = 2, gunInterval = 0.1;
 
 class LiveTank : public Object {
 	TankAvatar avatar;

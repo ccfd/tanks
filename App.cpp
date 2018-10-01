@@ -8,13 +8,13 @@
 App::App() : back(resources.back) {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	window = new sf::RenderWindow(sf::VideoMode(1120, 630), "Tanks", sf::Style::Default, settings);
+	window = new sf::RenderWindow(sf::VideoMode(1120, 630), "Objects", sf::Style::Default, settings);
 	window->setFramerateLimit(24);
 	window->setVerticalSyncEnabled(true);
 	back.scale(gscale,gscale);
 	hit.setBuffer(resources.hitbuffer);
-	tanks.push_back(new LiveTank(new KeyboardPlayer(), 350,300,0,0));
-	tanks.push_back(new LiveTank(new Player(), 600,300,1,0));
+	objects.push_back(new LiveTank(new KeyboardPlayer(), 350,300,0,0));
+	objects.push_back(new LiveTank(new Player(), 600,300,1,0));
 	{
 		Polygon poly;
 		poly.push_back(Point(1510*gscale,    90*gscale));
@@ -23,7 +23,7 @@ App::App() : back(resources.back) {
 		poly.push_back(Point(1663*gscale,   817*gscale));
 		poly.push_back(Point(1573*gscale,   318*gscale));
 		poly.push_back(Point(1558*gscale,   319*gscale));
-		tanks.push_back(new Obstacle(poly));
+		objects.push_back(new Obstacle(poly));
 	}
 	{
 		Polygon poly;
@@ -34,17 +34,18 @@ App::App() : back(resources.back) {
 		poly.push_back(Point(1204*gscale,  1080*gscale));
 		poly.push_back(Point( 202*gscale,  1080*gscale));
 		poly.insideout = true;
-		tanks.push_back(new Obstacle(poly));
+		objects.push_back(new Obstacle(poly));
 	}
 }
 
 void App::Draw() {
 	window->draw(back);
-	for (Tanks::iterator t = tanks.begin(); t != tanks.end(); t++) (*t)->Draw(window);
+	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Draw(window);
+	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Draw(window);
 }
 
 void App::DrawExtents() {
-	for (Tanks::iterator t = tanks.begin(); t != tanks.end(); t++) {
+	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) {
 		Polygon ext = (*t)->Extent();
 		std::vector<sf::Vertex> sfPoly;
 		sf::Color color(0, 255, 0);
@@ -73,13 +74,17 @@ void App::DrawExtents() {
 }
 
 void App::AddObject(Object * obj) {
-	tanks.push_back(obj);
+	objects.push_back(obj);
 }
 
-std::vector<Object*> App::GetCollision(Object * obj) {
-	std::vector<Object*> ret;
+void App::AddBullet(Object * obj) {
+	bullets.push_back(obj);
+}
+
+App::Objects App::GetCollision(Object * obj) {
+	Objects ret;
 	Polygon me = obj->Extent();
-	for (Tanks::iterator t = tanks.begin(); t != tanks.end(); t++) {
+	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) {
 		Polygon ext = (*t)->Extent();
 		//			bool inside = me.intersect(ext);
 		bool inside = ext.intersect(me);
@@ -96,17 +101,23 @@ void App::Hit(float pitch) {
 	if (!mute) hit.play();
 };
 
-void App::Tick() {
-	for (Tanks::iterator t = tanks.begin(); t != tanks.end(); t++) (*t)->Tick(this);
-	Tanks::iterator t = tanks.begin();
-	while (t != tanks.end()) {
+void Clear(App::Objects& objects) {
+	App::Objects::iterator t = objects.begin();
+	while (t != objects.end()) {
 		if ((*t)->IsAlive()) {  // "Bring out your dead!"
 			t++;
 		} else {
 			delete (*t);
-			t = tanks.erase(t);
+			t = objects.erase(t);
 		}
 	}
+}
+
+void App::Tick() {
+	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Tick(this);
+	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Tick(this);
+	Clear(objects);
+	Clear(bullets);
 }
 
 int App::Run() {

@@ -65,7 +65,7 @@ void LiveTank::Tick(App* app) {
 		y += -cos(rb)*v*dt;
 		rb += om*dt;
 		rh += om*dt;
-		std::vector<Object*> col = app->GetCollision(this);
+		App::Objects col = app->GetCollision(this);
 		if (col.size() > 0) {
 			x = ox;
 			y = oy;
@@ -92,7 +92,7 @@ void LiveTank::Tick(App* app) {
 void LiveTank::Shoot(App* app, double r, double hp, double pitch, double vb) {
 	double l = 25;
 	avatar.Shoot(pitch);
-	app->AddObject(new Bullet(x+l*sin(rh),y-l*cos(rh),vb*sin(rh),-vb*cos(rh), r, hp));
+	app->AddBullet(new Bullet(x+l*sin(rh),y-l*cos(rh),vb*sin(rh),-vb*cos(rh), r, hp));
 };
 Polygon LiveTank::Extent() {
 	Polygon poly;
