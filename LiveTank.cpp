@@ -58,10 +58,23 @@ void LiveTank::Hit(double hp) {
 
 		double v = (v1+v2)/2;
 		double om = (-v1+v2)/24;
-		x +=  sin(rb)*v*dt;
-		y += -cos(rb)*v*dt;
-		rb += om*dt;
-		rh += (om+omh)*dt;
+
+		{
+			double ox=x, oy=y, orb=rb, orh=rh;
+			x +=  sin(rb)*v*dt;
+			y += -cos(rb)*v*dt;
+			rb += om*dt;
+			rh += om*dt;
+			std::vector<Object*> col = app->GetCollision(this);
+			if (col.size() > 0) {
+				x = ox;
+				y = oy;
+				rb = orb;
+				rh = orh;
+			}
+			rh += omh*dt;
+		}
+
 		v = fabs(v1);
 		if (v < fabs(v2)) v = fabs(v2);
 		avatar.setPosition(x,y,rb,rh,v);
