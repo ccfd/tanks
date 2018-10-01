@@ -16,4 +16,5 @@ public:
 	void Tick();
 	int Run();
 	void AddObject(Object*);
+	std::vector<Object*> GetCollision(Object *);
 };

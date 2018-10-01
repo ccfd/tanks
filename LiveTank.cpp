@@ -11,9 +11,20 @@ LiveTank::LiveTank (Player *player_, double x_, double y_, double rb_, double rh
 		cannonAmmunition = 10;
 		lastCannonShot = 1;
 		lastGunShot = 1;
+		HP = 100;
 	}
 
 LiveTank::~LiveTank() {};
+
+void LiveTank::Hit(double hp) {
+	HP -= hp;
+	printf("I was hit by: %lf hp\n", hp);
+	if (HP <= 0) {
+		HP = 0;
+		
+		Dissapear();
+	}
+}
 
 	void LiveTank::Draw(sf::RenderWindow* window) {
 		avatar.Draw(window);
@@ -56,19 +67,19 @@ LiveTank::~LiveTank() {};
 		avatar.setPosition(x,y,rb,rh,v);
 		
 		if (canShootCannon && control.wannaShootCannon) {
-			Shoot(app, 2,0.5,20);
+			Shoot(app, 2,50,0.5,40);
 			cannonAmmunition--;
 			lastCannonShot = t;
 		} else if (canShootGun && control.wannaShootGun) {
-			Shoot(app, 1.3, 1.0,200);
+			Shoot(app, 1.3,5, 1.0,200);
 			gunAmmunition--;
 			lastGunShot = t;
 		}
 	};
-		void LiveTank::Shoot(App* app, double r, double pitch, double vb) {
+		void LiveTank::Shoot(App* app, double r, double hp, double pitch, double vb) {
 			double l = 25;
 			avatar.Shoot(pitch);
-			app->AddObject(new Bullet(x+l*sin(rh),y-l*cos(rh),vb*sin(rh),-vb*cos(rh),r));
+			app->AddObject(new Bullet(x+l*sin(rh),y-l*cos(rh),vb*sin(rh),-vb*cos(rh), r, hp));
 		};
 	Polygon LiveTank::Extent() {
 		Polygon poly;

@@ -12,7 +12,7 @@ TankAvatar::TankAvatar ():head(resources.head), body(resources.body) {
 		engine.setLoop(true);
 		shot.setBuffer(resources.shotbuffer);
 		this->setPosition(600,600,0,0,0);
-		engine.play();
+		if (!mute) engine.play();
 	}
 	void TankAvatar::Draw(sf::RenderWindow* window) {
         window->draw(body);
@@ -31,7 +31,7 @@ TankAvatar::TankAvatar ():head(resources.head), body(resources.body) {
 	};
 	void TankAvatar::Shoot(float pitch) {
 		shot.setPitch(pitch);
-		shot.play();
+		if (!mute) shot.play();
 	};
 
 
