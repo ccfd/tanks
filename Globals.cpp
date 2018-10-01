@@ -72,7 +72,11 @@ semiLineCut Polygon::cut(const semiLine& line) const {
 bool Polygon::inside(const Point& p) const {
     semiLine line(p, Point(1.0,0));
     semiLineCut mycut = this->cut(line);
-    return (mycut.count % 2) == 1;
+    if (insideout) {
+        return (mycut.count % 2) == 0;
+    } else {
+        return (mycut.count % 2) == 1;
+    }
 }
 
 bool Polygon::intersect(const Polygon& ext) const {

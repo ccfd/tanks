@@ -36,6 +36,9 @@ struct semiLineCut {
 };
 
 struct Polygon : public std::vector<Point> {
+    bool insideout;
+    inline Polygon() { insideout = false; }
+    inline Polygon(const Polygon& poly_) : std::vector<Point>(poly_), insideout(poly_.insideout) { }
     semiLineCut cut(const semiLine&) const;
     bool inside(const Point&) const;
     bool intersect(const Polygon& ext) const;

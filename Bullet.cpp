@@ -6,7 +6,9 @@ Bullet::Bullet (double x_, double y_, double vx_, double vy_, double r_, double 
 		circle.setOrigin(r,r);
 	};
 
-	Bullet::~Bullet(){};
+	Bullet::~Bullet(){
+		printf("Bullet ginie\n");
+	};
 
 	void Bullet::Draw(sf::RenderWindow* window) {
 		window->draw(circle);
