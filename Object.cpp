@@ -1,7 +1,7 @@
 #include "Object.h"
 
 Object::Object() {
-  live = true;
+	live = true;
 }
 
 void Object::Hit(double hp) {
@@ -9,7 +9,7 @@ void Object::Hit(double hp) {
 }
 
 void Object::Dissapear() {
-  live = false;
+	live = false;
 }
 
 Object::~Object() {

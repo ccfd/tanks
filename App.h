@@ -9,6 +9,7 @@ class App {
 	sf::Sprite back;
 	typedef std::list<Object*> Tanks;
 	Tanks tanks;
+	sf::Sound hit;
 public:
 	App();
 	void Draw();
@@ -17,4 +18,5 @@ public:
 	int Run();
 	void AddObject(Object*);
 	std::vector<Object*> GetCollision(Object *);
+	void Hit(float pitch);
 };
