@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include "KeyboardPlayer.h"
 #include "Obstacle.h"
+#include "Bots/SimpleBot.h"
 #include <assert.h>
 
 App::App() : back(resources.back) {
@@ -14,7 +15,7 @@ App::App() : back(resources.back) {
 	back.scale(gscale,gscale);
 	hit.setBuffer(resources.hitbuffer);
 	objects.push_back(new LiveTank(new KeyboardPlayer(), 350,300,0,0));
-	objects.push_back(new LiveTank(new Player(), 600,300,1,0));
+	objects.push_back(new LiveTank(new SimpleBot(), 600,300,1,0));
 	{
 		Polygon poly;
 		poly.push_back(Point(1510*gscale,    90*gscale));
