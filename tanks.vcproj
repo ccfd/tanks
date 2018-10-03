@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)\SFML-2.0\include&quot;"
+				AdditionalIncludeDirectories="$(SolutionDir)/SFML-2.0/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="sfml-system-d.lib sfml-graphics-d.lib sfml-window-d.lib sfml-audio-d.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(SolutionDir)\SFML-2.0\lib&quot;"
+				AdditionalLibraryDirectories="$(SolutionDir)/SFML-2.0/lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -210,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\SimpleBot\SimpleBot.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\TankAvatar.cpp"
 				>
 			</File>
@@ -253,6 +257,10 @@
 			</File>
 			<File
 				RelativePath=".\src\Player.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SimpleBot\SimpleBot.h"
 				>
 			</File>
 			<File
