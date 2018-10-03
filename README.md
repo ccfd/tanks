@@ -1,4 +1,4 @@
-# Tanks !
+# Tanks!
 
 A game like no other.
 
