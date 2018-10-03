@@ -7,14 +7,14 @@ void err(const std::string& msg) {
 }
 
 Resources::Resources() {
-	if (!back.loadFromFile("back.jpg")) err("back.jpg not found");
-	if (!head.loadFromFile("head.png")) err("head.png not found");
-	if (!body.loadFromFile("body.png")) err("body.png not found");
+	if (!back.loadFromFile("media/back.jpg")) err("media/back.jpg not found");
+	if (!head.loadFromFile("media/head.png")) err("media/head.png not found");
+	if (!body.loadFromFile("media/body.png")) err("media/body.png not found");
 	back.setSmooth(true);
 	head.setSmooth(true);
 	body.setSmooth(true);
-	if (!shotbuffer.loadFromFile("lightmachinegun.ogg")) err("lightmachinegun.ogg not found");
-	if (!hitbuffer.loadFromFile("hit1.ogg")) err("hit1.ogg not found");
+	if (!shotbuffer.loadFromFile("media/lightmachinegun.ogg")) err("media/lightmachinegun.ogg not found");
+	if (!hitbuffer.loadFromFile("media/hit1.ogg")) err("media/hit1.ogg not found");
 }
 
 Resources resources;

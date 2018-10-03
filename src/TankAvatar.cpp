@@ -8,7 +8,7 @@ TankAvatar::TankAvatar ():head(resources.head), body(resources.body) {
 	body.scale(gscale,gscale);
 	//		head.setColor(sf::Color(128, 255, 128));
 	//		body.setColor(sf::Color(128, 255, 128));
-	if (!engine.openFromFile("sherman_e8.ogg")) err("sherman_e8.ogg not found"); // error
+	if (!engine.openFromFile("media/sherman_e8.ogg")) err("media/sherman_e8.ogg not found"); // error
 	engine.setLoop(true);
 	shot.setBuffer(resources.shotbuffer);
 	this->setPosition(600,600,0,0,0);

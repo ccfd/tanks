@@ -1,5 +1,7 @@
 
-main : main.o App.o Bullet.o Globals.o LiveTank.o Object.o TankAvatar.o Player.o TankControl.o KeyboardPlayer.o Obstacle.o Bots/SimpleBot.o
+
+
+main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o ./src/Object.o ./src/TankAvatar.o ./src/Player.o ./src/TankControl.o ./src/KeyboardPlayer.o ./src/Obstacle.o ./src/SimpleBot/SimpleBot.o
 	g++ -o $@ $^ -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
 
 
@@ -8,66 +10,66 @@ main : main.o App.o Bullet.o Globals.o LiveTank.o Object.o TankAvatar.o Player.o
 
 
 ## DEP
-./main.cpp : ./App.h
+./src/KeyboardPlayer.h : ./src/Player.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./LiveTank.h : ./Object.h ./TankAvatar.h ./Player.h
+./src/LiveTank.cpp : ./src/LiveTank.h ./src/App.h ./src/Bullet.h ./src/TankControl.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./LiveTank.cpp : ./LiveTank.h ./App.h ./Bullet.h ./TankControl.h
+./src/Bullet.h : ./src/Object.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Player.h : ./TankControl.h
+./src/Obstacle.cpp : ./src/Obstacle.h ./src/App.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./TankControl.cpp : ./TankControl.h
+./src/Globals.cpp : ./src/Globals.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./TankAvatar.cpp : ./Globals.h ./TankAvatar.h
+# ./src/TankAvatar.h
+./src/Bullet.cpp : ./src/Bullet.h ./src/App.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Globals.cpp : ./Globals.h
+# ./src/Globals.h
+./src/App.cpp : ./src/App.h ./src/LiveTank.h ./src/Bullet.h ./src/KeyboardPlayer.h ./src/Obstacle.h ./src/SimpleBot/SimpleBot.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./App.cpp : ./App.h ./LiveTank.h ./Bullet.h ./KeyboardPlayer.h ./Obstacle.h ./SimpleBot/SimpleBot.h
+./src/Object.cpp : ./src/Object.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./KeyboardPlayer.h : ./Player.h
+./src/LiveTank.h : ./src/Object.h ./src/TankAvatar.h ./src/Player.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-# ./TankAvatar.h
-./Bullet.cpp : ./Bullet.h ./App.h
+./src/App.h : ./src/Object.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./SimpleBot/SimpleBot.h : ./SimpleBot/../Player.h
+./src/main.cpp : ./src/App.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./SimpleBot/SimpleBot.cpp : ./SimpleBot/SimpleBot.h
+./src/TankAvatar.cpp : ./src/Globals.h ./src/TankAvatar.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Object.h : ./Globals.h
+./src/Obstacle.h : ./src/Object.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Obstacle.h : ./Object.h
+./src/Player.h : ./src/TankControl.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Object.cpp : ./Object.h
+./src/TankControl.cpp : ./src/TankControl.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-# ./TankControl.h
-./App.h : ./Object.h
+./src/SimpleBot/SimpleBot.h : ./src/SimpleBot/../Player.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Obstacle.cpp : ./Obstacle.h ./App.h
+./src/SimpleBot/SimpleBot.cpp : ./src/SimpleBot/SimpleBot.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Player.cpp : ./Player.h
+# ./src/TankControl.h
+./src/Object.h : ./src/Globals.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Bullet.h : ./Object.h
+./src/Player.cpp : ./src/Player.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-# ./Globals.h
-./KeyboardPlayer.cpp : ./KeyboardPlayer.h
+./src/KeyboardPlayer.cpp : ./src/KeyboardPlayer.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
