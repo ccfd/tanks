@@ -29,7 +29,7 @@ main : main.o App.o Bullet.o Globals.o LiveTank.o Object.o TankAvatar.o Player.o
 ./Globals.cpp : ./Globals.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./App.cpp : ./App.h ./LiveTank.h ./Bullet.h ./KeyboardPlayer.h ./Obstacle.h ./Bots/SimpleBot.h
+./App.cpp : ./App.h ./LiveTank.h ./Bullet.h ./KeyboardPlayer.h ./Obstacle.h ./SimpleBot/SimpleBot.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 ./KeyboardPlayer.h : ./Player.h
@@ -39,10 +39,10 @@ main : main.o App.o Bullet.o Globals.o LiveTank.o Object.o TankAvatar.o Player.o
 ./Bullet.cpp : ./Bullet.h ./App.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Bots/SimpleBot.h : ./Bots/../Player.h
+./SimpleBot/SimpleBot.h : ./SimpleBot/../Player.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./Bots/SimpleBot.cpp : ./Bots/SimpleBot.h
+./SimpleBot/SimpleBot.cpp : ./SimpleBot/SimpleBot.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 ./Object.h : ./Globals.h

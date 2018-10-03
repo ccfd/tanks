@@ -3,13 +3,13 @@
 #include "Bullet.h"
 #include "KeyboardPlayer.h"
 #include "Obstacle.h"
-#include "Bots/SimpleBot.h"
+#include "SimpleBot/SimpleBot.h"
 #include <assert.h>
 
 App::App() : back(resources.back) {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	window = new sf::RenderWindow(sf::VideoMode(1120, 630), "Objects", sf::Style::Fullscreen, settings);
+	window = new sf::RenderWindow(sf::VideoMode(1120, 630), "Objects", sf::Style::Default, settings);
 	window->setFramerateLimit(24);
 	window->setVerticalSyncEnabled(true);
 	back.scale(gscale,gscale);
