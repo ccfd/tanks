@@ -11,6 +11,7 @@ KeyboardPlayer::KeyboardPlayer(void)
 void KeyboardPlayer::Play(double time, TankControl* control) {
 	double forward = 0, sideways = 0, turn = 0, lift = 0;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RControl)) control->ShootGun();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl)) control->ShootGun();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) control->ShootCannon();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) turn -= 1;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) turn += 1;
