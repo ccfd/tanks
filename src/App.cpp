@@ -106,14 +106,23 @@ semiLineCut App::GetCut(Object * obj, const semiLine &line) {
 	}
 	if (ret.count > 0) {
 		std::vector<sf::Vertex> sfPoly;
-		sf::Color color(127, 127, 127);
+		sf::Color color(255, 255, 255, 30);
 		sfPoly.push_back(sf::Vertex(line.base+25.0f*line.direction, color));
-		double gret = log(1.1);
-		ret.distance = exp((ceil(log(ret.distance)/gret-0.5))*gret);
-//		ret.distance = exp((ceil(log(ret.distance)*10))/10);
-		sfPoly.push_back(sf::Vertex(line.base+((float)ret.distance)*line.direction, color));
+		double err = 0.0;
+		if (err > 0.0) {
+			double gret = log(1+err);
+	//		ret.distance = exp((ceil(log(ret.distance)/gret-0.5))*gret);
+	//		ret.distance = exp((floor(log(ret.distance)/gret)+1.0*rand()/RAND_MAX)*gret);
+			ret.distance = ret.distance*(1 + (1.0*rand()/RAND_MAX - 0.5)*err);
+			ret.cut = line.base+((float)ret.distance)*line.direction;
+		}
+		sfPoly.push_back(sf::Vertex(ret.cut, color));
 //		sfPoly.push_back(sf::Vertex(ret.cut, color));
-		window->draw(&sfPoly[0], sfPoly.size(), sf::LinesStrip);
+		window->draw(&sfPoly[0], sfPoly.size(), sf::Lines);
+		sf::CircleShape circ(2);
+		circ.setOrigin(2,2);
+		circ.setPosition(ret.cut.x,ret.cut.y);
+		window->draw(circ);
 	}
 	return ret;
 }
