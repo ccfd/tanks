@@ -8,7 +8,7 @@ class Object {
 public:
 	Object();
 	virtual ~Object();
-	virtual void Draw(sf::RenderWindow* window) = 0;
+	virtual void Draw(App*, sf::RenderWindow* window) = 0;
 	virtual void Tick(App*) = 0;
 	virtual Polygon Extent() = 0;
 	virtual void Hit(double);

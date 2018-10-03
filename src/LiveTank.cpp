@@ -26,9 +26,17 @@ void LiveTank::Hit(double hp) {
 	}
 }
 
-void LiveTank::Draw(sf::RenderWindow* window) {
+void LiveTank::Draw(App* app,sf::RenderWindow* window) {
 	avatar.Draw(window);
+	TankControl control;
+	for (Sights::iterator it = control.sights.begin(); it != control.sights.end(); it++) {
+		double r = it->angle + rh;
+		semiLine line(Point(x,y), Point(sin(r),-cos(r)));
+		semiLineCut cut = app->GetCut(this,line);
+		it->distance = cut.distance;
+	}
 };
+
 void LiveTank::Tick(App* app) {
 	t += dt;
 	TankControl control;
@@ -41,7 +49,14 @@ void LiveTank::Tick(App* app) {
 	bool canShootGun = (gunAmmunition > 0) && (t - lastGunShot > gunInterval);
 	control.canShootGun = canShootGun;
 	control.headAngle = rh - rb;
-
+	
+	for (Sights::iterator it = control.sights.begin(); it != control.sights.end(); it++) {
+		double r = it->angle + rh;
+		semiLine line(Point(x,y), Point(sin(r),-cos(r)));
+		semiLineCut cut = app->GetCut(this,line);
+		it->distance = cut.distance;
+	}
+	
 	// Control
 	player->Play(t, &control);
 
@@ -94,9 +109,10 @@ void LiveTank::Shoot(App* app, double r, double hp, double pitch, double vb) {
 	avatar.Shoot(pitch);
 	app->AddBullet(new Bullet(x+l*sin(rh),y-l*cos(rh),vb*sin(rh),-vb*cos(rh), r, hp));
 };
+
 Polygon LiveTank::Extent() {
 	Polygon poly;
-	double w=18,h=15;
+	double w=15,h=12;
 	poly.push_back(Point(x+w*sin(rb)+h*cos(rb),y-w*cos(rb)+h*sin(rb)));
 	poly.push_back(Point(x+w*sin(rb)-h*cos(rb),y-w*cos(rb)-h*sin(rb)));
 	poly.push_back(Point(x-w*sin(rb)-h*cos(rb),y+w*cos(rb)-h*sin(rb)));

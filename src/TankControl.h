@@ -1,6 +1,21 @@
 #pragma once
 
+#include <vector>
+
 class LiveTank;
+
+struct Pixel {
+	double distance;
+	double angle;
+	int tag;
+};
+
+class Sights : public std::vector< Pixel > {
+public:
+	static const int resolution;
+	static const double alpha;
+	Sights();
+};
 
 class TankControl
 {
@@ -11,6 +26,8 @@ class TankControl
 	double left, right, turn, lift;
 	double headAngle, cannonAngle,azimuth;
 public:
+	static const int resolution;
+	static const double alpha;
 	TankControl();
 	bool CanShootGun();
 	void ShootGun();
@@ -23,4 +40,5 @@ public:
 	int GetCannonAmmunition();
 	int GetGunAmmunition();
 	~TankControl();
+	Sights sights;
 };

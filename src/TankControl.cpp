@@ -1,5 +1,14 @@
 #include "TankControl.h"
 
+const int Sights::resolution = 25;
+const double Sights::alpha = 1;
+
+Sights::Sights() : std::vector< Pixel >(resolution) {
+	for (int i = 0; i < resolution; i++) {
+		(*this)[i].angle = alpha * i / (resolution - 1) - alpha / 2;
+	}
+};
+
 TankControl::TankControl() {
 	canShootGun = false;
 	canShootCannon = false;

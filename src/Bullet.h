@@ -11,7 +11,7 @@ class Bullet : public Object {
 public:
 	Bullet (double x_, double y_, double vx_, double vy_, double r_, double hp_);
 	virtual ~Bullet();
-	virtual void Draw(sf::RenderWindow* window);
+	virtual void Draw(App*,sf::RenderWindow* window);
 	virtual void Tick(App*);
 	virtual Polygon Extent();
 };

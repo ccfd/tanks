@@ -7,7 +7,7 @@ class Obstacle : public Object {
 public:
 	Obstacle (Polygon & poly_);
 	virtual ~Obstacle();
-	virtual void Draw(sf::RenderWindow* window);
+	virtual void Draw(App*,sf::RenderWindow* window);
 	virtual void Tick(App*);
 	virtual Polygon Extent();
 };

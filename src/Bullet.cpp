@@ -10,7 +10,7 @@ Bullet::~Bullet(){
 
 };
 
-void Bullet::Draw(sf::RenderWindow* window) {
+void Bullet::Draw(App*,sf::RenderWindow* window) {
 	window->draw(circle);
 };
 void Bullet::Tick(App* app) {

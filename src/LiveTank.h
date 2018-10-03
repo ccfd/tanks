@@ -15,7 +15,7 @@ class LiveTank : public Object {
 public:
 	LiveTank (Player *player_, double x_, double y_, double rb_, double rh_);
 	~LiveTank ();
-	virtual void Draw(sf::RenderWindow* window);
+	virtual void Draw(App*,sf::RenderWindow* window);
 	virtual void Tick(App* app);
 	virtual Polygon Extent();
 	virtual void Hit(double);

@@ -44,7 +44,6 @@ semiLineCut::semiLineCut(){
 
 void semiLineCut::add(const semiLineCut& line){
 	if (line.count == 0) return;
-	count = count + line.count;
 	if (count == 0) {
 		cut = line.cut;
 		distance = line.distance;
@@ -54,6 +53,7 @@ void semiLineCut::add(const semiLineCut& line){
 			distance = line.distance;
 		}                
 	}
+	count = count + line.count;
 }
 
 

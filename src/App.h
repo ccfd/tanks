@@ -23,4 +23,5 @@ public:
 	void AddBullet(Object*);
 	Objects GetCollision(Object *);
 	void Hit(float pitch);
+	semiLineCut GetCut(Object * obj, const semiLine &line);
 };

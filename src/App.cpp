@@ -41,8 +41,8 @@ App::App() : back(resources.back) {
 
 void App::Draw() {
 	window->draw(back);
-	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Draw(window);
-	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Draw(window);
+	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Draw(this,window);
+	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Draw(this,window);
 }
 
 void App::DrawExtents() {
@@ -85,17 +85,39 @@ void App::AddBullet(Object * obj) {
 App::Objects App::GetCollision(Object * obj) {
 	Objects ret;
 	Polygon me = obj->Extent();
-	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) {
+	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) if (obj != (*t)) {
 		Polygon ext = (*t)->Extent();
 		//			bool inside = me.intersect(ext);
 		bool inside = ext.intersect(me);
 		assert(me.intersect(ext) == ext.intersect(me));
-		if ( (inside) && (obj != (*t)) ) {
+		if (inside) {
 			ret.push_back(*t);
 		}
 	}
 	return ret;
 }
+
+semiLineCut App::GetCut(Object * obj, const semiLine &line) {
+	semiLineCut ret;
+	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) if (obj != (*t)) {
+		Polygon ext = (*t)->Extent();
+		semiLineCut part = ext.cut(line);
+		ret.add(part);
+	}
+	if (ret.count > 0) {
+		std::vector<sf::Vertex> sfPoly;
+		sf::Color color(127, 127, 127);
+		sfPoly.push_back(sf::Vertex(line.base+25.0f*line.direction, color));
+		double gret = log(1.1);
+		ret.distance = exp((ceil(log(ret.distance)/gret-0.5))*gret);
+//		ret.distance = exp((ceil(log(ret.distance)*10))/10);
+		sfPoly.push_back(sf::Vertex(line.base+((float)ret.distance)*line.direction, color));
+//		sfPoly.push_back(sf::Vertex(ret.cut, color));
+		window->draw(&sfPoly[0], sfPoly.size(), sf::LinesStrip);
+	}
+	return ret;
+}
+
 
 void App::Hit(float pitch) {
 	hit.setPitch(pitch);
@@ -134,7 +156,7 @@ int App::Run() {
 		this->Tick();
 		window->clear();
 		this->Draw();
-		//			this->DrawExtents();
+		this->DrawExtents();
 		window->display();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) window->close();
 	}

@@ -9,7 +9,7 @@ Obstacle::~Obstacle(){
 
 };
 
-void Obstacle::Draw(sf::RenderWindow* window) {
+void Obstacle::Draw(App*,sf::RenderWindow* window) {
 
 };
 
