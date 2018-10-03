@@ -9,7 +9,7 @@
 App::App() : back(resources.back) {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	window = new sf::RenderWindow(sf::VideoMode(1120, 630), "Objects", sf::Style::Default, settings);
+	window = new sf::RenderWindow(sf::VideoMode(1120, 630), "Objects", sf::Style::Fullscreen, settings);
 	window->setFramerateLimit(24);
 	window->setVerticalSyncEnabled(true);
 	back.scale(gscale,gscale);

@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "math.h"
+#include <math.h>
 
 Player::Player()
 {

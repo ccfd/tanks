@@ -3,6 +3,7 @@
 #include <SFML/Audio.hpp>
 #include <math.h>
 #include <ostream>
+#include <string>
 
 const double gscale = 630.0/1080.0;
 const double pi = atan(1.0)*4;
@@ -10,7 +11,7 @@ const double dt = 1.0/24.0;
 
 const bool mute = false;
 
-void err(char * msg);
+void err(const std::string& msg);
 
 struct Resources {
 	sf::Texture back, head, body;
