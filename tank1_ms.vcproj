@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\Users\llaniewski\Documents\tank1_ms\tank1_ms\SFML-2.0\include&quot;"
+				AdditionalIncludeDirectories="$(SolutionDir)\SFML-2.0\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="sfml-system-d.lib sfml-graphics-d.lib sfml-window-d.lib sfml-audio-d.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;C:\Users\llaniewski\Documents\tank1_ms\tank1_ms\SFML-2.0\lib&quot;"
+				AdditionalLibraryDirectories="$(SolutionDir)\SFML-2.0\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -174,47 +174,47 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\App.cpp"
+				RelativePath=".\src\App.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Bullet.cpp"
+				RelativePath=".\src\Bullet.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Globals.cpp"
+				RelativePath=".\src\Globals.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\KeyboardPlayer.cpp"
+				RelativePath=".\src\KeyboardPlayer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\LiveTank.cpp"
+				RelativePath=".\src\LiveTank.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\main.cpp"
+				RelativePath=".\src\main.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Object.cpp"
+				RelativePath=".\src\Object.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Obstacle.cpp"
+				RelativePath=".\src\Obstacle.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Player.cpp"
+				RelativePath=".\src\Player.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\TankAvatar.cpp"
+				RelativePath=".\src\TankAvatar.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\TankControl.cpp"
+				RelativePath=".\src\TankControl.cpp"
 				>
 			</File>
 		</Filter>
@@ -224,43 +224,43 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\App.h"
+				RelativePath=".\src\App.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Bullet.h"
+				RelativePath=".\src\Bullet.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Globals.h"
+				RelativePath=".\src\Globals.h"
 				>
 			</File>
 			<File
-				RelativePath=".\KeyboardPlayer.h"
+				RelativePath=".\src\KeyboardPlayer.h"
 				>
 			</File>
 			<File
-				RelativePath=".\LiveTank.h"
+				RelativePath=".\src\LiveTank.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Object.h"
+				RelativePath=".\src\Object.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Obstacle.h"
+				RelativePath=".\src\Obstacle.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Player.h"
+				RelativePath=".\src\Player.h"
 				>
 			</File>
 			<File
-				RelativePath=".\TankAvatar.h"
+				RelativePath=".\src\TankAvatar.h"
 				>
 			</File>
 			<File
-				RelativePath=".\TankControl.h"
+				RelativePath=".\src\TankControl.h"
 				>
 			</File>
 		</Filter>
