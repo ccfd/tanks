@@ -10,4 +10,4 @@ This repository is a course material for C++ course at MEiL PW (https://meil.pw.
 
 ### Pictures and sound
 
-The media used in the game are described [here](ccfd/tanks/blob/master/media/README.md)
+The media used in the game are described [here](/ccfd/tanks/blob/master/media/README.md)
