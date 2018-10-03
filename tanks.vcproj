@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="tank1_ms"
+	Name="tanks"
 	ProjectGUID="{B0D34556-AF47-4030-80DE-09B5DD461ACF}"
-	RootNamespace="tank1_ms"
+	RootNamespace="tanks"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
