@@ -1,5 +1,5 @@
 
-main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o ./src/Object.o ./src/TankAvatar.o ./src/Player.o ./src/TankControl.o ./src/KeyboardPlayer.o ./src/Obstacle.o ./src/SimpleBot/SimpleBot.o ./src/llaniewski/SuperBot.o
+main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o ./src/Object.o ./src/TankAvatar.o ./src/Player.o ./src/TankControl.o ./src/KeyboardPlayer.o ./src/Obstacle.o ./src/SimpleBot/SimpleBot.o
 	g++ -o $@ $^ -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
 
 
