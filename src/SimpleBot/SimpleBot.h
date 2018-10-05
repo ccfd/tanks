@@ -2,6 +2,8 @@
 #include "../Player.h"
 #include <string>
 
+namespace SimpleBot {
+
 class SimpleBot : public Player {
 public:
 	static std::string id;
@@ -9,3 +11,5 @@ public:
 	virtual void Play(double, TankControl *);
 	virtual ~SimpleBot();
 };
+
+}
