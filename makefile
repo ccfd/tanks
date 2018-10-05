@@ -1,7 +1,5 @@
 
-
-
-main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o ./src/Object.o ./src/TankAvatar.o ./src/Player.o ./src/TankControl.o ./src/KeyboardPlayer.o ./src/Obstacle.o ./src/SimpleBot/SimpleBot.o
+main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o ./src/Object.o ./src/TankAvatar.o ./src/Player.o ./src/TankControl.o ./src/KeyboardPlayer.o ./src/Obstacle.o ./src/SimpleBot/SimpleBot.o ./src/llaniewski/SuperBot.o
 	g++ -o $@ $^ -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
 
 
@@ -30,7 +28,7 @@ main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o 
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 # ./src/Globals.h
-./src/App.cpp : ./src/App.h ./src/LiveTank.h ./src/Bullet.h ./src/KeyboardPlayer.h ./src/Obstacle.h ./src/SimpleBot/SimpleBot.h
+./src/App.cpp : ./src/App.h ./src/LiveTank.h ./src/Bullet.h ./src/KeyboardPlayer.h ./src/Obstacle.h ./src/SimpleBot/SimpleBot.h ./src/Factory.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 ./src/Object.cpp : ./src/Object.h
@@ -51,16 +49,23 @@ main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o 
 ./src/Obstacle.h : ./src/Object.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
+./src/llaniewski/SuperBot.h : ./src/llaniewski/../Player.h
+	@test -f $@ && touch $@
+	@echo $@ depends on $^
+./src/llaniewski/SuperBot.cpp : ./src/llaniewski/SuperBot.h
+	@test -f $@ && touch $@
+	@echo $@ depends on $^
 ./src/Player.h : ./src/TankControl.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 ./src/TankControl.cpp : ./src/TankControl.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
+# ./src/Factory.h
 ./src/SimpleBot/SimpleBot.h : ./src/SimpleBot/../Player.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./src/SimpleBot/SimpleBot.cpp : ./src/SimpleBot/SimpleBot.h
+./src/SimpleBot/SimpleBot.cpp : ./src/SimpleBot/SimpleBot.h ./src/SimpleBot/../Factory.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 # ./src/TankControl.h

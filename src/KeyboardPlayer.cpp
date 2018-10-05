@@ -3,6 +3,8 @@
 //#include <SFML/Keyboard.hpp>
 #include <SFML/Graphics.hpp>
 
+std::string KeyboardPlayer::id = "KeyboardPlayer";
+
 KeyboardPlayer::KeyboardPlayer(void)
 {
 
@@ -26,3 +28,5 @@ KeyboardPlayer::~KeyboardPlayer(void)
 {
 
 }
+
+template class PlayerFactory::Register < KeyboardPlayer >;

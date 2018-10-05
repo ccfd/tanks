@@ -1,6 +1,8 @@
 #include "SimpleBot.h"
 #include <math.h>
 
+std::string SimpleBot::id = "SimpleBot";
+
 SimpleBot::SimpleBot(void)
 {
 
@@ -19,3 +21,5 @@ SimpleBot::~SimpleBot(void)
 {
 
 }
+
+template class PlayerFactory::Register < SimpleBot >;

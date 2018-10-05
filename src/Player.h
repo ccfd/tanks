@@ -1,5 +1,6 @@
 #pragma once
 #include "TankControl.h"
+#include <string>
 
 class Player
 {
@@ -8,3 +9,5 @@ public:
 	virtual void Play(double, TankControl*);
 	virtual ~Player();
 };
+
+#include "Factory.h"
