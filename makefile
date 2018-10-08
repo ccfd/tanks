@@ -28,7 +28,7 @@ main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o 
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 # ./src/Globals.h
-./src/App.cpp : ./src/App.h ./src/LiveTank.h ./src/Bullet.h ./src/KeyboardPlayer.h ./src/Obstacle.h ./src/SimpleBot/SimpleBot.h ./src/Factory.h
+./src/App.cpp : ./src/App.h ./src/LiveTank.h ./src/Bullet.h ./src/Obstacle.h ./src/Factory.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 ./src/Object.cpp : ./src/Object.h
@@ -49,13 +49,7 @@ main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o 
 ./src/Obstacle.h : ./src/Object.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./src/llaniewski/SuperBot.h : ./src/llaniewski/../Player.h
-	@test -f $@ && touch $@
-	@echo $@ depends on $^
-./src/llaniewski/SuperBot.cpp : ./src/llaniewski/SuperBot.h
-	@test -f $@ && touch $@
-	@echo $@ depends on $^
-./src/Player.h : ./src/TankControl.h
+./src/Player.h : ./src/TankControl.h ./src/Factory.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 ./src/TankControl.cpp : ./src/TankControl.h
@@ -65,7 +59,7 @@ main : ./src/main.o ./src/App.o ./src/Bullet.o ./src/Globals.o ./src/LiveTank.o 
 ./src/SimpleBot/SimpleBot.h : ./src/SimpleBot/../Player.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
-./src/SimpleBot/SimpleBot.cpp : ./src/SimpleBot/SimpleBot.h ./src/SimpleBot/../Factory.h
+./src/SimpleBot/SimpleBot.cpp : ./src/SimpleBot/SimpleBot.h
 	@test -f $@ && touch $@
 	@echo $@ depends on $^
 # ./src/TankControl.h
