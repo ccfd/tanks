@@ -32,3 +32,6 @@
 *.app
 
 *~
+
+/dep.mk
+/main
