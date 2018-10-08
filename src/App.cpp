@@ -5,7 +5,7 @@
 #include "Factory.h"
 #include <assert.h>
 
-App::App() : back(resources.back) {
+App::App(const Strings& arg) : back(resources.back) {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	window = new sf::RenderWindow(sf::VideoMode(854, 480), "Objects", sf::Style::Default, settings);
@@ -13,13 +13,17 @@ App::App() : back(resources.back) {
 	window->setVerticalSyncEnabled(true);
 	back.scale(gscale,gscale);
 	hit.setBuffer(resources.hitbuffer);
+	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++)
+		playerNames.push_back(*it);
+	if (playerNames.size() < 2) playerNames.push_back("KeyboardPlayer");
+	if (playerNames.size() < 2) playerNames.push_back("SimpleBot");
 	Player * player;
-	player = PlayerFactory::Produce("KeyboardPlayer");
-	if (player == NULL) err("KeyboardPlayer not found");
-	objects.push_back(new LiveTank(player, 350,300,0,0));
-	player = PlayerFactory::Produce("SimpleBot");
-	if (player == NULL) err("SimpleBot not found");
-	objects.push_back(new LiveTank(player, 600,300,1,0));
+	for (Strings::iterator it = playerNames.begin(); it != playerNames.end(); it++) {
+		player = PlayerFactory::Produce(*it);
+		printf("Adding player: %s\n",it->c_str());
+		if (player == NULL) err("Player not found");
+		objects.push_back(new LiveTank(player, 350,300,0,0));
+	}
 	{
 		Polygon poly;
 		poly.push_back(Point(1510*gscale,    90*gscale));

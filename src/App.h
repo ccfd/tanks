@@ -7,14 +7,16 @@
 class App {
 public:
 	typedef std::list<Object*> Objects;
+	typedef std::vector<std::string> Strings;
 private:
 	sf::RenderWindow* window;
 	sf::Sprite back;
 	Objects objects;
 	Objects bullets;
 	sf::Sound hit;
+	Strings playerNames;
 public:
-	App();
+	App(const Strings&);
 	void Draw();
 	void DrawExtents();
 	void Tick();
