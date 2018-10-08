@@ -5,16 +5,25 @@
 #include "Factory.h"
 #include <assert.h>
 
-App::App(const Strings& arg) : back(resources.back) {
+App::App(const Strings& arg) : back(resources.back), fullScreen(false) {
+	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++) {
+		if (*it == "-f") {
+			fullScreen = true;
+		} else {
+			playerNames.push_back(*it);
+		}
+	}
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Objects", sf::Style::Default, settings);
+	if (fullScreen) {
+		window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Objects", sf::Style::Fullscreen, settings);
+	} else {
+		window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Objects", sf::Style::Default, settings);
+	}		
 	window->setFramerateLimit(24);
 	window->setVerticalSyncEnabled(true);
 	back.scale(gscale,gscale);
 	hit.setBuffer(resources.hitbuffer);
-	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++)
-		playerNames.push_back(*it);
 	if (playerNames.size() < 2) playerNames.push_back("KeyboardPlayer");
 	if (playerNames.size() < 2) playerNames.push_back("SimpleBot");
 	Player * player;
