@@ -8,7 +8,7 @@
 App::App(const Strings& arg) : back(resources.back) {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	window = new sf::RenderWindow(sf::VideoMode(854, 480), "Objects", sf::Style::Default, settings);
+	window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Objects", sf::Style::Default, settings);
 	window->setFramerateLimit(24);
 	window->setVerticalSyncEnabled(true);
 	back.scale(gscale,gscale);
@@ -18,11 +18,15 @@ App::App(const Strings& arg) : back(resources.back) {
 	if (playerNames.size() < 2) playerNames.push_back("KeyboardPlayer");
 	if (playerNames.size() < 2) playerNames.push_back("SimpleBot");
 	Player * player;
+	int tankNumber = 0;
+	double tankAngle = 8*atan(1.0)/playerNames.size();
 	for (Strings::iterator it = playerNames.begin(); it != playerNames.end(); it++) {
 		player = PlayerFactory::Produce(*it);
 		printf("Adding player: %s\n",it->c_str());
 		if (player == NULL) err("Player not found");
-		objects.push_back(new LiveTank(player, 350,300,0,0));
+		double a = tankAngle * tankNumber;
+		objects.push_back(new LiveTank(player, gscale*(960+cos(a)*400),gscale*(540+sin(a)*400),0,0));
+		tankNumber++;
 	}
 	{
 		Polygon poly;
