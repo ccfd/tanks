@@ -4,12 +4,12 @@
 
 namespace SimpleBot {
 
-class SimpleBot : public Player {
+class BotPlayer : public Player {
 public:
-	static RegisterPlayer< SimpleBot > id;
-	SimpleBot();
+	static RegisterPlayer< BotPlayer > id;
+	BotPlayer();
 	virtual void Play(double, TankControl *);
-	virtual ~SimpleBot();
+	virtual ~BotPlayer();
 };
 
 }

@@ -1,16 +1,16 @@
-#include "SimpleBot.h"
+#include "BotPlayer.h"
 #include <math.h>
 
 namespace SimpleBot {
 
-RegisterPlayer< SimpleBot > SimpleBot::id("SimpleBot");
+RegisterPlayer< BotPlayer > BotPlayer::id("SimpleBot");
 
-SimpleBot::SimpleBot(void)
+BotPlayer::BotPlayer(void)
 {
 
 }
 
-void SimpleBot::Play(double time, TankControl* control) {
+void BotPlayer::Play(double time, TankControl* control) {
 	double left, right, turn=0, lift=0;
 	left = 25*sin(time);
 	right = 25;
@@ -19,7 +19,7 @@ void SimpleBot::Play(double time, TankControl* control) {
 	control->SetEngines(left, right, turn, lift);
 }
 
-SimpleBot::~SimpleBot(void)
+BotPlayer::~BotPlayer(void)
 {
 
 }
