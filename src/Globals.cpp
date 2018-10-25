@@ -20,7 +20,7 @@ Resources::Resources() {
 Resources resources;
 
 
-semiLineCut cutLine(const semiLine& line, const Point& p1, const Point& p2) {
+semiLineCut cutLine(const semiLine& line, const Point& p1, const Point& p2, const tag_t& tag) {
 	semiLineCut ret;
 	// line.base + t*line.direction = w*p1 + (1-w)*p2
 	// t*line.direction + w*(p2 - p1) = p2 - line.base
@@ -33,6 +33,7 @@ semiLineCut cutLine(const semiLine& line, const Point& p1, const Point& p2) {
 	if ((t >= 0) && (0 <= w) && (w <= 1)) {
 		ret.cut = line.base + line.direction * ((float) t);
 		ret.count = 1;
+		ret.tag = tag;
 		ret.distance = sqrt(line.direction.x*line.direction.x + line.direction.y*line.direction.y) * t;
 	}
 	return ret;
@@ -47,10 +48,12 @@ void semiLineCut::add(const semiLineCut& line){
 	if (count == 0) {
 		cut = line.cut;
 		distance = line.distance;
+		tag = line.tag;
 	} else {
 		if (distance > line.distance) {
 			cut = line.cut;
 			distance = line.distance;
+			tag = line.tag;
 		}                
 	}
 	count = count + line.count;
@@ -63,7 +66,7 @@ semiLineCut Polygon::cut(const semiLine& line) const {
 		for (int i=0; i<this->size(); i++) {
 			int j = i + 1;
 			if (j >= this->size()) j=0;
-			semiLineCut newcut = cutLine(line, (*this)[i], (*this)[j]);
+			semiLineCut newcut = cutLine(line, (*this)[i], (*this)[j], tag);
 			ret.add(newcut);
 		}
 	}

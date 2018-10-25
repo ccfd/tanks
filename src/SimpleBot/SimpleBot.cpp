@@ -3,7 +3,7 @@
 
 namespace SimpleBot {
 
-std::string SimpleBot::id = "SimpleBot";
+RegisterPlayer< SimpleBot > SimpleBot::id("SimpleBot");
 
 SimpleBot::SimpleBot(void)
 {
@@ -26,4 +26,3 @@ SimpleBot::~SimpleBot(void)
 
 }
 
-template class PlayerFactory::Register < SimpleBot::SimpleBot >;

@@ -6,7 +6,7 @@ namespace SimpleBot {
 
 class SimpleBot : public Player {
 public:
-	static std::string id;
+	static RegisterPlayer< SimpleBot > id;
 	SimpleBot();
 	virtual void Play(double, TankControl *);
 	virtual ~SimpleBot();

@@ -5,6 +5,7 @@ class App;
 
 class Object {
 	bool live;
+	tag_t tag;
 public:
 	Object();
 	virtual ~Object();
@@ -13,5 +14,6 @@ public:
 	virtual Polygon Extent() = 0;
 	virtual void Hit(double);
 	virtual void Dissapear();
+	inline const tag_t& Tag() { return tag; };
 	inline bool IsAlive() { return live; }
 };

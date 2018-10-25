@@ -2,6 +2,7 @@
 
 Object::Object() {
 	live = true;
+	tag = TAG_UNKNOWN;
 }
 
 void Object::Hit(double hp) {
