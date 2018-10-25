@@ -4,6 +4,7 @@
 #include "Obstacle.h"
 #include "Factory.h"
 #include <assert.h>
+#include <stdio.h>
 
 App::App(const Strings& arg) : back(resources.back), fullScreen(false) {
 	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++) {

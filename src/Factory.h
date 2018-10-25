@@ -35,7 +35,6 @@ public:
 template <class P> class RegisterPlayer {
 public:
         RegisterPlayer(PlayerFactory::Key k) {
-                printf("Registering...\n");
                 PlayerFactory::Register(k, new PlayerProducer<P>);
         }
 };
