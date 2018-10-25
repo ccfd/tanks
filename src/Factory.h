@@ -1,10 +1,10 @@
 #ifndef FACTORY_H
 #define FACTORY_H
 
-#include "Player.h"
 #include <vector>
 #include <map>
 
+class Player;
 
 class GenericPlayerProducer {
 public:
