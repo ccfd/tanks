@@ -16,6 +16,9 @@ private:
 	sf::Sound hit;
 	Strings playerNames;
 	bool fullScreen;
+	bool mute;
+	double timeLimit;
+	double fps;
 public:
 	App(const Strings&);
 	void Draw();

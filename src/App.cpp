@@ -6,10 +6,24 @@
 #include <assert.h>
 #include <stdio.h>
 
-App::App(const Strings& arg) : back(resources.back), fullScreen(false) {
+App::App(const Strings& arg) : back(resources.back) {
+	fps = 24;
+	fullScreen = false;
+	mute = false;
+	timeLimit = 86400.0;
 	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++) {
 		if (*it == "-f") {
 			fullScreen = true;
+		} else if (*it == "-m") {
+			mute = true;
+		} else if (*it == "-t") {
+			it++;
+			if (it == arg.end()) throw "No time provided after -t";
+			timeLimit = std::atof(it->c_str());
+		} else if (*it == "-fps") {
+			it++;
+			if (it == arg.end()) throw "No fps provided after -fps";
+			fps = std::atof(it->c_str());
 		} else {
 			playerNames.push_back(*it);
 		}
@@ -21,8 +35,9 @@ App::App(const Strings& arg) : back(resources.back), fullScreen(false) {
 	} else {
 		window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Objects", sf::Style::Default, settings);
 	}		
-	window->setFramerateLimit(24);
+	window->setFramerateLimit(fps);
 	window->setVerticalSyncEnabled(true);
+	if (mute) sf::Listener::setGlobalVolume(0.0);
 	back.scale(gscale,gscale);
 	hit.setBuffer(resources.hitbuffer);
 	if (playerNames.size() < 2) playerNames.push_back("KeyboardPlayer");
@@ -175,9 +190,10 @@ void App::Tick() {
 }
 
 int App::Run() {
+	double Time = 0;
 	while (window->isOpen())
 	{
-
+		Time += dt;
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
@@ -189,6 +205,7 @@ int App::Run() {
 		this->Draw();
 		this->DrawExtents();
 		window->display();
+		if (Time > timeLimit) window->close();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) window->close();
 	}
 	return EXIT_SUCCESS;
