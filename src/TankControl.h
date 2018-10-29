@@ -1,13 +1,14 @@
 #pragma once
 
 #include <vector>
+#include "Globals.h"
 
 class LiveTank;
 
 struct Pixel {
 	double distance;
 	double angle;
-	int tag;
+	tag_t tag;
 };
 
 class Sights : public std::vector< Pixel > {

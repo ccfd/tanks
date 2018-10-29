@@ -117,7 +117,7 @@ App::Objects App::GetCollision(Object * obj) {
 	return ret;
 }
 
-semiLineCut App::GetCut(Object * obj, const semiLine &line) {
+semiLineCut App::GetCut(Object * obj, const semiLine &line, bool draw) {
 	semiLineCut ret;
 	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) if (obj != (*t)) {
 		Polygon ext = (*t)->Extent();
@@ -125,9 +125,6 @@ semiLineCut App::GetCut(Object * obj, const semiLine &line) {
 		ret.add(part);
 	}
 	if (ret.count > 0) {
-		std::vector<sf::Vertex> sfPoly;
-		sf::Color color(255, 255, 255, 30);
-		sfPoly.push_back(sf::Vertex(line.base+25.0f*line.direction, color));
 		double err = 0.0;
 		if (err > 0.0) {
 			double gret = log(1+err);
@@ -136,13 +133,18 @@ semiLineCut App::GetCut(Object * obj, const semiLine &line) {
 			ret.distance = ret.distance*(1 + (1.0*rand()/RAND_MAX - 0.5)*err);
 			ret.cut = line.base+((float)ret.distance)*line.direction;
 		}
-		sfPoly.push_back(sf::Vertex(ret.cut, color));
-//		sfPoly.push_back(sf::Vertex(ret.cut, color));
-		window->draw(&sfPoly[0], sfPoly.size(), sf::Lines);
-		sf::CircleShape circ(2);
-		circ.setOrigin(2,2);
-		circ.setPosition(ret.cut.x,ret.cut.y);
-		window->draw(circ);
+		if (draw) {
+			std::vector<sf::Vertex> sfPoly;
+			sf::Color color(255, 255, 255, 30);
+			sfPoly.push_back(sf::Vertex(line.base+25.0f*line.direction, color));
+			sfPoly.push_back(sf::Vertex(ret.cut, color));
+	//		sfPoly.push_back(sf::Vertex(ret.cut, color));
+			window->draw(&sfPoly[0], sfPoly.size(), sf::Lines);
+			sf::CircleShape circ(2);
+			circ.setOrigin(2,2);
+			circ.setPosition(ret.cut.x,ret.cut.y);
+			window->draw(circ);
+		}
 	}
 	return ret;
 }

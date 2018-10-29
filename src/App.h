@@ -30,5 +30,5 @@ public:
 	void AddBullet(Object*);
 	Objects GetCollision(Object *);
 	void Hit(float pitch);
-	semiLineCut GetCut(Object * obj, const semiLine &line);
+	semiLineCut GetCut(Object * obj, const semiLine &line, bool draw=false);
 };

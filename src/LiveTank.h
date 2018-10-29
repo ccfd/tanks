@@ -10,6 +10,7 @@ class LiveTank : public Object {
 	double x,y,rb,rh,rc,t;
 	double cannonAmmunition, gunAmmunition, lastCannonShot, lastGunShot;
 	void Shoot(App* app, double r, double hp, double pitch, double vb);
+	void FillSights(Sights & sights, App* app, bool draw = false);
 	Player* player;
 	double HP;
 public:

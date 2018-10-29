@@ -22,7 +22,6 @@ void LiveTank::Hit(double hp) {
 	printf("I was hit by: %lf hp\n", hp);
 	if (HP <= 0) {
 		HP = 0;
-
 		Dissapear();
 	}
 }
@@ -31,15 +30,19 @@ void LiveTank::Draw(App* app,sf::RenderWindow* window) {
 	avatar.Draw(window);
 };
 
+void LiveTank::FillSights(Sights & sights, App* app, bool draw) {
+	for (Sights::iterator it = sights.begin(); it != sights.end(); it++) {
+		double r = it->angle + rh;
+		semiLine line(Point(x,y), Point(sin(r),-cos(r)));
+		semiLineCut cut = app->GetCut(this,line,draw);
+		it->distance = cut.distance;
+	}
+};
+
 void LiveTank::DrawExtents(App* app,sf::RenderWindow* window) {
 	Object::DrawExtents(app,window);
 	TankControl control;
-	for (Sights::iterator it = control.sights.begin(); it != control.sights.end(); it++) {
-		double r = it->angle + rh;
-		semiLine line(Point(x,y), Point(sin(r),-cos(r)));
-		semiLineCut cut = app->GetCut(this,line);
-		it->distance = cut.distance;
-	}
+	FillSights(control.sights,app,true);
 };
 
 void LiveTank::Tick(App* app) {
@@ -55,12 +58,7 @@ void LiveTank::Tick(App* app) {
 	control.canShootGun = canShootGun;
 	control.headAngle = rh - rb;
 	
-	for (Sights::iterator it = control.sights.begin(); it != control.sights.end(); it++) {
-		double r = it->angle + rh;
-		semiLine line(Point(x,y), Point(sin(r),-cos(r)));
-		semiLineCut cut = app->GetCut(this,line);
-		it->distance = cut.distance;
-	}
+	FillSights(control.sights,app);
 	
 	// Control
 	player->Play(t, &control);
