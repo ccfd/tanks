@@ -1,6 +1,6 @@
 #include "TankControl.h"
 
-const int Sights::resolution = 25;
+const int Sights::resolution = 81;
 const double Sights::alpha = 1;
 
 Sights::Sights() : std::vector< Pixel >(resolution) {
