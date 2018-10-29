@@ -29,6 +29,10 @@ void LiveTank::Hit(double hp) {
 
 void LiveTank::Draw(App* app,sf::RenderWindow* window) {
 	avatar.Draw(window);
+};
+
+void LiveTank::DrawExtents(App* app,sf::RenderWindow* window) {
+	Object::DrawExtents(app,window);
 	TankControl control;
 	for (Sights::iterator it = control.sights.begin(); it != control.sights.end(); it++) {
 		double r = it->angle + rh;
@@ -93,7 +97,7 @@ void LiveTank::Tick(App* app) {
 
 	v = fabs(v1);
 	if (v < fabs(v2)) v = fabs(v2);
-	avatar.setPosition(x,y,rb,rh,v);
+	avatar.setPosition(x,y,rb,rh,v,HP/100.0);
 
 	if (canShootCannon && control.wannaShootCannon) {
 		Shoot(app, 2,50,0.5,40);

@@ -17,6 +17,7 @@ private:
 	Strings playerNames;
 	bool fullScreen;
 	bool mute;
+	bool graphics, extents;
 	double timeLimit;
 	double fps;
 public:

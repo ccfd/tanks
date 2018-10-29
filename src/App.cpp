@@ -11,11 +11,18 @@ App::App(const Strings& arg) : back(resources.back) {
 	fullScreen = false;
 	mute = false;
 	timeLimit = 86400.0;
+	graphics = true;
+	extents = false;
 	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++) {
 		if (*it == "-f") {
 			fullScreen = true;
 		} else if (*it == "-m") {
 			mute = true;
+		} else if (*it == "-e") {
+			extents = true;
+		} else if (*it == "-x") {
+			extents = true;
+			graphics = false;
 		} else if (*it == "-t") {
 			it++;
 			if (it == arg.end()) throw "No time provided after -t";
@@ -83,32 +90,8 @@ void App::Draw() {
 }
 
 void App::DrawExtents() {
-	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) {
-		Polygon ext = (*t)->Extent();
-		std::vector<sf::Vertex> sfPoly;
-		sf::Color color(0, 255, 0);
-		int count = GetCollision(*t).size();
-		if (count == 1) {
-			color = sf::Color(255, 0, 0);
-		}
-		if (count == 2) {
-			color = sf::Color(255, 255, 0);
-		}
-		if (count == 3) {
-			color = sf::Color(0, 255, 255);
-		}
-		if (count == 4) {
-			color = sf::Color(0, 0, 255);
-		}
-		for (Polygon::iterator p = ext.begin(); p != ext.end(); p++) {
-			sfPoly.push_back(sf::Vertex(*p, color));
-		}
-		{
-			Polygon::iterator p = ext.begin();
-			sfPoly.push_back(sf::Vertex(*p, color));
-		}
-		window->draw(&sfPoly[0], sfPoly.size(), sf::LinesStrip);
-	}
+	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->DrawExtents(this,window);
+	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->DrawExtents(this,window);
 }
 
 void App::AddObject(Object * obj) {
@@ -202,8 +185,8 @@ int App::Run() {
 		}
 		this->Tick();
 		window->clear();
-		this->Draw();
-		this->DrawExtents();
+		if (graphics) this->Draw();
+		if (extents) this->DrawExtents();
 		window->display();
 		if (Time > timeLimit) window->close();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) window->close();
