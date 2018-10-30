@@ -7,7 +7,7 @@ class Object {
 	bool live;
 	tag_t tag;
 public:
-	Object();
+	Object(tag_t tag_ = TAG_UNKNOWN);
 	virtual ~Object();
 	virtual void Draw(App*, sf::RenderWindow* window) = 0;
 	virtual void DrawExtents(App*, sf::RenderWindow* window);

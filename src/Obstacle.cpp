@@ -1,7 +1,7 @@
 #include "Obstacle.h"
 #include "App.h"
 
-Obstacle::Obstacle (Polygon & poly_): poly(poly_) {
+Obstacle::Obstacle (Polygon & poly_): Object(poly_.tag), poly(poly_) {
 
 };
 

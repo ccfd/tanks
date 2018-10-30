@@ -6,7 +6,7 @@
 #include "TankControl.h"
 
 
-LiveTank::LiveTank (Player *player_, double x_, double y_, double rb_, double rh_) : player(player_), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
+LiveTank::LiveTank (Player *player_, double x_, double y_, double rb_, double rh_) : Object(TAG_PLAYER), player(player_), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
 	rc = 0;
 	gunAmmunition = 1000;
 	cannonAmmunition = 10;
@@ -36,6 +36,7 @@ void LiveTank::FillSights(Sights & sights, App* app, bool draw) {
 		semiLine line(Point(x,y), Point(sin(r),-cos(r)));
 		semiLineCut cut = app->GetCut(this,line,draw);
 		it->distance = cut.distance;
+		it->tag = cut.tag;
 	}
 };
 
@@ -115,11 +116,12 @@ void LiveTank::Shoot(App* app, double r, double hp, double pitch, double vb) {
 
 Polygon LiveTank::Extent() {
 	Polygon poly;
-	double w=15,h=12;
+	double w=20,h=15;
 	poly.push_back(Point(x+w*sin(rb)+h*cos(rb),y-w*cos(rb)+h*sin(rb)));
 	poly.push_back(Point(x+w*sin(rb)-h*cos(rb),y-w*cos(rb)-h*sin(rb)));
 	poly.push_back(Point(x-w*sin(rb)-h*cos(rb),y+w*cos(rb)-h*sin(rb)));
 	poly.push_back(Point(x-w*sin(rb)+h*cos(rb),y+w*cos(rb)+h*sin(rb)));
+	poly.tag = Tag();
 	return poly;
 };
 

@@ -141,6 +141,9 @@ semiLineCut App::GetCut(Object * obj, const semiLine &line, bool draw) {
 	//		sfPoly.push_back(sf::Vertex(ret.cut, color));
 			window->draw(&sfPoly[0], sfPoly.size(), sf::Lines);
 			sf::CircleShape circ(2);
+			if (ret.tag == TAG_UNKNOWN) {
+				circ.setFillColor(sf::Color(255,0,0,255));
+			}
 			circ.setOrigin(2,2);
 			circ.setPosition(ret.cut.x,ret.cut.y);
 			window->draw(circ);

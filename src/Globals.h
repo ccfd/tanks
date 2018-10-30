@@ -46,7 +46,7 @@ struct semiLineCut {
 struct Polygon : public std::vector<Point> {
 	bool insideout;
 	tag_t tag;
-	inline Polygon() { insideout = false; tag = 0; }
+	inline Polygon() { insideout = false; tag = TAG_UNKNOWN; }
 	inline Polygon(const Polygon& poly_) : std::vector<Point>(poly_), insideout(poly_.insideout), tag(poly_.tag) { }
 	semiLineCut cut(const semiLine&) const;
 	bool inside(const Point&) const;

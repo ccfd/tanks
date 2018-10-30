@@ -1,9 +1,9 @@
 #include "Object.h"
 #include "App.h"
 
-Object::Object() {
+Object::Object(tag_t tag_) {
 	live = true;
-	tag = TAG_UNKNOWN;
+	tag = tag_;
 }
 
 void Object::Hit(double hp) {
