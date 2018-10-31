@@ -23,6 +23,10 @@ TankAvatar::TankAvatar () :
 	lifeFrame.setOutlineThickness(1);
 	lifeFrame.setOutlineColor(lifecolor);
 	lifeFrame.setFillColor(sf::Color::Transparent);
+	tankName.setFont(resources.bold);
+	tankName.setCharacterSize(10);
+        tankName.setColor(lifecolor);
+        setName("unknown");
 }
 
 void TankAvatar::Draw(sf::RenderWindow* window) {
@@ -30,6 +34,13 @@ void TankAvatar::Draw(sf::RenderWindow* window) {
 	window->draw(head);
 	window->draw(lifeStatus);
 	window->draw(lifeFrame);
+	window->draw(tankName);
+};
+
+void TankAvatar::setName(const std::string& name_) {
+	tankName.setString(name_);
+	sf::FloatRect bounds = tankName.getLocalBounds();
+	tankName.setOrigin(bounds.width/2,bounds.height + 50);
 };
 
 void TankAvatar::setPosition(double x, double y, double rb, double rh, double v, double life) {
@@ -40,6 +51,7 @@ void TankAvatar::setPosition(double x, double y, double rb, double rh, double v,
 	lifeFrame.setPosition(x-15,y-40);
 	lifeStatus.setPosition(x-15,y-40);
 	lifeStatus.setScale(life,1.0);
+	tankName.setPosition(x,y);
 	v = v/25;
 	if (v<0) v=0;
 	if (v>1) v=0;

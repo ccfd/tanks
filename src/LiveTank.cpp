@@ -6,13 +6,14 @@
 #include "TankControl.h"
 
 
-LiveTank::LiveTank (Player *player_, double x_, double y_, double rb_, double rh_) : Object(TAG_PLAYER), player(player_), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
+LiveTank::LiveTank (Player *player_, double x_, double y_, double rb_, double rh_, const std::string & name_) : Object(TAG_PLAYER), player(player_), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
 	rc = 0;
 	gunAmmunition = 1000;
 	cannonAmmunition = 10;
 	lastCannonShot = prepTime;
 	lastGunShot = prepTime;
 	HP = 100;
+	avatar.setName(name_);
 }
 
 LiveTank::~LiveTank() {};

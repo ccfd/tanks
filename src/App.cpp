@@ -60,7 +60,7 @@ App::App(const Strings& arg) : back(resources.back) {
 		if (player == NULL) err("Player not found");
 		double a = tankAngle * tankNumber + 0.5*tankAngle*rand()/RAND_MAX;
 		double rb = 2*pi*rand()/RAND_MAX;
-		objects.push_back(new LiveTank(player, gscale*(960+cos(a)*400),gscale*(540+sin(a)*400),rb,rb));
+		objects.push_back(new LiveTank(player, gscale*(960+cos(a)*400),gscale*(540+sin(a)*400),rb,rb, *it));
 		tankNumber++;
 	}
 	{

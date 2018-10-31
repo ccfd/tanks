@@ -14,7 +14,7 @@ class LiveTank : public Object {
 	Player* player;
 	double HP;
 public:
-	LiveTank (Player *player_, double x_, double y_, double rb_, double rh_);
+	LiveTank (Player *player_, double x_, double y_, double rb_, double rh_, const std::string & name_);
 	~LiveTank ();
 	virtual void Draw(App*,sf::RenderWindow* window);
 	virtual void DrawExtents(App*,sf::RenderWindow* window);
