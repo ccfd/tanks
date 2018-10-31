@@ -99,11 +99,21 @@ void LiveTank::Tick(App* app) {
 	avatar.setPosition(x,y,rb,rh,v,HP/100.0);
 
 	if (canShootCannon && control.wannaShootCannon) {
-		Shoot(app, 2,50,0.5,40);
+		Shoot(app,
+			2,   // bullet radius
+			50,  // bullet HP
+			0.5, // sound pitch
+			40   // speed
+		);
 		cannonAmmunition--;
 		lastCannonShot = t;
 	} else if (canShootGun && control.wannaShootGun) {
-		Shoot(app, 1.3,5, 1.0,200);
+		Shoot(app, 
+			1.3, // bullet radius
+			1,   // bullet HP
+			1.0, // sound pitch
+			200  // speed
+		);
 		gunAmmunition--;
 		lastGunShot = t;
 	}

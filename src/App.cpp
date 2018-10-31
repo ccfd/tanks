@@ -51,13 +51,15 @@ App::App(const Strings& arg) : back(resources.back) {
 	if (playerNames.size() < 2) playerNames.push_back("SimpleBot");
 	Player * player;
 	int tankNumber = 0;
-	double tankAngle = 8*atan(1.0)/playerNames.size();
+	const double pi = atan(1.0)*4;
+	double tankAngle = 2*pi/playerNames.size();
 	for (Strings::iterator it = playerNames.begin(); it != playerNames.end(); it++) {
 		player = PlayerFactory::Produce(*it);
 		printf("Adding player: %s\n",it->c_str());
 		if (player == NULL) err("Player not found");
-		double a = tankAngle * tankNumber;
-		objects.push_back(new LiveTank(player, gscale*(960+cos(a)*400),gscale*(540+sin(a)*400),0,0));
+		double a = tankAngle * tankNumber + 0.5*tankAngle*rand()/RAND_MAX;
+		double rb = 2*pi*rand()/RAND_MAX;
+		objects.push_back(new LiveTank(player, gscale*(960+cos(a)*400),gscale*(540+sin(a)*400),rb,rb));
 		tankNumber++;
 	}
 	{
@@ -68,6 +70,7 @@ App::App(const Strings& arg) : back(resources.back) {
 		poly.push_back(Point(1663*gscale,   817*gscale));
 		poly.push_back(Point(1573*gscale,   318*gscale));
 		poly.push_back(Point(1558*gscale,   319*gscale));
+		poly.tag = TAG_OBSTACLE;
 		objects.push_back(new Obstacle(poly));
 	}
 	{
@@ -78,6 +81,7 @@ App::App(const Strings& arg) : back(resources.back) {
 		poly.push_back(Point(1828*gscale,  1002*gscale));
 		poly.push_back(Point(1204*gscale,  1080*gscale));
 		poly.push_back(Point( 202*gscale,  1080*gscale));
+		poly.tag = TAG_OBSTACLE;
 		poly.insideout = true;
 		objects.push_back(new Obstacle(poly));
 	}

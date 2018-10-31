@@ -45,6 +45,7 @@ void TankAvatar::setPosition(double x, double y, double rb, double rh, double v,
 	v = 0.8 + v*(2.0-0.8);
 	engine.setPitch(v);
 };
+
 void TankAvatar::Shoot(float pitch) {
 	shot.setPitch(pitch);
 	shot.play();
