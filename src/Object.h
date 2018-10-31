@@ -1,5 +1,6 @@
 #pragma once
 #include "Globals.h"
+#include "GeometryTools.h"
 
 class App;
 

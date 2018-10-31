@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Object.h"
+#include "GeometryTools.h"
 #include <list>
 
 class App {
