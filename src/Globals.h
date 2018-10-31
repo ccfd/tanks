@@ -12,14 +12,6 @@ const double dt = 1.0/24.0;
 
 void err(const std::string& msg);
 
-struct Resources {
-	sf::Texture back, head, body;
-	sf::SoundBuffer shotbuffer, hitbuffer;
-	Resources();
-};
-
-extern Resources resources;
-
 typedef sf::Vector2f Point;
 
 typedef unsigned int tag_t;

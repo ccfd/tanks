@@ -1,4 +1,5 @@
 #include "App.h"
+#include "Resources.h"
 #include "LiveTank.h"
 #include "Bullet.h"
 #include "Obstacle.h"

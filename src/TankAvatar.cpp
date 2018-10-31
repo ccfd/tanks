@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "TankAvatar.h"
+#include "Resources.h"
 
 TankAvatar::TankAvatar () : 
 		head(resources.head), 
