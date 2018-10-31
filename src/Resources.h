@@ -8,6 +8,7 @@
 struct Resources {
 	sf::Texture back, head, body;
 	sf::SoundBuffer shotbuffer, hitbuffer;
+	sf::Font regular, bold, italic;
 	Resources();
 };
 

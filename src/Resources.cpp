@@ -10,6 +10,9 @@ Resources::Resources() {
 	body.setSmooth(true);
 	if (!shotbuffer.loadFromFile("media/lightmachinegun.ogg")) err("media/lightmachinegun.ogg not found");
 	if (!hitbuffer.loadFromFile("media/hit1.ogg")) err("media/hit1.ogg not found");
+	if (!regular.loadFromFile("media/LiberationSans-Regular.ttf")) err("media/LiberationSans-Regular.ttf not found");
+	if (!   bold.loadFromFile("media/LiberationSans-Bold.ttf"))    err("media/LiberationSans-Bold.ttf    not found");
+	if (! italic.loadFromFile("media/LiberationSans-Italic.ttf"))  err("media/LiberationSans-Italic.ttf  not found");
 }
 
 Resources resources;

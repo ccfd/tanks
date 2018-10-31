@@ -10,8 +10,8 @@ LiveTank::LiveTank (Player *player_, double x_, double y_, double rb_, double rh
 	rc = 0;
 	gunAmmunition = 1000;
 	cannonAmmunition = 10;
-	lastCannonShot = 1;
-	lastGunShot = 1;
+	lastCannonShot = prepTime;
+	lastGunShot = prepTime;
 	HP = 100;
 }
 

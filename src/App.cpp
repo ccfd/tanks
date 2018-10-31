@@ -86,12 +86,56 @@ App::App(const Strings& arg) : back(resources.back) {
 		poly.insideout = true;
 		objects.push_back(new Obstacle(poly));
 	}
+	clockText.setFont(resources.regular);
+	clockText.setCharacterSize(24*5); // in pixels, not points!
+	clockText.setScale(0.2,0.2);
+	clockText.setColor(sf::Color::Blue);
+	clockText.setStyle(sf::Text::Bold);
+	clockText.setPosition(sf::Vector2f(640,360));
 }
 
 void App::Draw() {
 	window->draw(back);
 	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Draw(this,window);
 	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Draw(this,window);
+	if (Time < prepTime + 1) {
+		char str[60];
+		double t = prepTime + 1 - Time;
+		double it = floor(t);
+		double w = t - it;
+		w = 1.0*(1-w) + 0.2*w;
+		if (it > 0.0) {		
+			sprintf(str, "%.0f", it);
+			clockText.setString(str);
+		} else {
+			clockText.setString("START");
+		}
+		clockText.setScale(w,w);
+		sf::FloatRect bounds = clockText.getLocalBounds();
+		clockText.setOrigin(bounds.width/2,bounds.height);
+		sf::Color color(0, 0, 128, 255*(1-w));
+		clockText.setColor(color);
+		window->draw(clockText);
+	} else if (timeLimit - Time < 1200) {
+		static bool first = true;
+		if (first) {
+			clockText.setCharacterSize(24);
+			clockText.setScale(1,1);
+			clockText.setOrigin(0,0);
+			sf::Color color(0, 0, 128, 128);
+			clockText.setColor(color);
+			clockText.setPosition(160,670);
+			first = false;
+		}
+		char str[60];
+		double t = timeLimit - Time;
+		double it = floor(t);
+		double mt = floor(t/60);
+		double st = it - mt*60;
+		sprintf(str, "Time left: %.0f:%02.0f", mt, st);
+		clockText.setString(str);
+		window->draw(clockText);
+	}
 }
 
 void App::DrawExtents() {
@@ -183,7 +227,6 @@ void App::Tick() {
 }
 
 int App::Run() {
-	double Time = 0;
 	while (window->isOpen())
 	{
 		Time += dt;

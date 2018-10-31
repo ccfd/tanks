@@ -12,6 +12,7 @@ public:
 private:
 	sf::RenderWindow* window;
 	sf::Sprite back;
+	sf::Text clockText;
 	Objects objects;
 	Objects bullets;
 	sf::Sound hit;
@@ -21,6 +22,7 @@ private:
 	bool graphics, extents;
 	double timeLimit;
 	double fps;
+	double Time;
 public:
 	App(const Strings&);
 	void Draw();

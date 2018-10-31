@@ -5,6 +5,7 @@
 const double gscale = 720.0/1080.0;
 const double pi = atan(1.0)*4;
 const double dt = 1.0/24.0;
+const double prepTime = 3.0;
 
 void err(const std::string& msg);
 
