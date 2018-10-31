@@ -14,6 +14,7 @@ App::App(const Strings& arg) : back(resources.back) {
 	timeLimit = 86400.0;
 	graphics = true;
 	extents = false;
+	int obstacles=0;
 	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++) {
 		if (*it == "-f") {
 			fullScreen = true;
@@ -28,6 +29,10 @@ App::App(const Strings& arg) : back(resources.back) {
 			it++;
 			if (it == arg.end()) throw "No time provided after -t";
 			timeLimit = std::atof(it->c_str());
+		} else if (*it == "-o") {
+			it++;
+			if (it == arg.end()) throw "No number provided after -o";
+			obstacles = std::atoi(it->c_str());
 		} else if (*it == "-fps") {
 			it++;
 			if (it == arg.end()) throw "No fps provided after -fps";
@@ -86,6 +91,25 @@ App::App(const Strings& arg) : back(resources.back) {
 		poly.insideout = true;
 		objects.push_back(new Obstacle(poly));
 	}
+	for (int i=0; i<obstacles; i++) {
+		Obstacle * obst;
+		for (int i = 0; i < 20; i++) {
+			Polygon poly;
+			double x = (600.0*rand()/RAND_MAX + 660)*gscale;
+			double y = (600.0*rand()/RAND_MAX + 240)*gscale;
+			poly.push_back(Point(x+20,y+20));
+			poly.push_back(Point(x+20,y-20));
+			poly.push_back(Point(x-20,y-20));
+			poly.push_back(Point(x-20,y+20));
+			poly.tag = TAG_OBSTACLE;
+			obst = new Obstacle(poly);
+			if (GetCollision(obst).size() == 0) {
+				objects.push_back(obst);
+				break;
+			}
+			delete obst; 
+		}
+	}		
 	clockText.setFont(resources.regular);
 	clockText.setCharacterSize(24*5); // in pixels, not points!
 	clockText.setScale(0.2,0.2);
