@@ -12,6 +12,7 @@ class TankAvatar {
 public:
 	TankAvatar ();
 	void Draw(sf::RenderWindow* window);
+	void DrawInfo(sf::RenderWindow* window);
 	void setPosition(double x, double y, double rb, double rh, double v, double life);
 	void setName(const std::string& name_);
 	void Shoot(float pitch);

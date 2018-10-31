@@ -29,6 +29,7 @@ void LiveTank::Hit(double hp) {
 
 void LiveTank::Draw(App* app,sf::RenderWindow* window) {
 	avatar.Draw(window);
+	avatar.DrawInfo(window);
 };
 
 void LiveTank::FillSights(Sights & sights, App* app, bool draw) {
@@ -45,6 +46,7 @@ void LiveTank::DrawExtents(App* app,sf::RenderWindow* window) {
 	Object::DrawExtents(app,window);
 	TankControl control;
 	FillSights(control.sights,app,true);
+	avatar.DrawInfo(window);
 };
 
 void LiveTank::Tick(App* app) {
@@ -119,8 +121,9 @@ void LiveTank::Tick(App* app) {
 		lastGunShot = t;
 	}
 };
+
 void LiveTank::Shoot(App* app, double r, double hp, double pitch, double vb) {
-	double l = 25;
+	double l = 30;
 	avatar.Shoot(pitch);
 	app->AddBullet(new Bullet(x+l*sin(rh),y-l*cos(rh),vb*sin(rh),-vb*cos(rh), r, hp));
 };

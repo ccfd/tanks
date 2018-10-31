@@ -32,6 +32,9 @@ TankAvatar::TankAvatar () :
 void TankAvatar::Draw(sf::RenderWindow* window) {
 	window->draw(body);
 	window->draw(head);
+};
+
+void TankAvatar::DrawInfo(sf::RenderWindow* window) {
 	window->draw(lifeStatus);
 	window->draw(lifeFrame);
 	window->draw(tankName);
