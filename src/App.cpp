@@ -123,7 +123,7 @@ void App::Draw() {
 	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Draw(this,window);
 	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Draw(this,window);
 	if (Time < prepTime + 1) {
-		char str[60];
+		char str[256];
 		double t = prepTime + 1 - Time;
 		double it = floor(t);
 		double w = t - it;
@@ -151,7 +151,7 @@ void App::Draw() {
 			clockText.setPosition(160,670);
 			first = false;
 		}
-		char str[60];
+		char str[256];
 		double t = timeLimit - Time;
 		double it = floor(t);
 		double mt = floor(t/60);

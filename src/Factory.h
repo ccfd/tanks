@@ -2,6 +2,7 @@
 #define FACTORY_H
 
 #include <vector>
+#include <string>
 #include <map>
 
 class Player;
