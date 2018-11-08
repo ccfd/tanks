@@ -306,6 +306,20 @@ int App::Run() {
 		window->display();
 		if (Time > timeLimit) window->close();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) window->close();
+		int alive = 0;
+		for (AppPlayers::iterator it = players.begin(); it != players.end(); it++)
+			for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++)
+				if ( (*t)->getHP() > 0 ) { alive++; break; }
+		if (alive < 2) window->close();
+	}
+	printf("Results:\n");
+	printf("player points\n");
+	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) {
+		double points = 0;
+		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
+			points += (*t)->getHP();
+		}
+		printf("%s : %.0lf\n", it->name.c_str(), points);
 	}
 	return EXIT_SUCCESS;
 }

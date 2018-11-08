@@ -24,4 +24,5 @@ public:
 	virtual Polygon Extent();
 	virtual void Hit(double);
 	TankControl& getControl(App* app);
+	inline double getHP() { return HP; };
 };
