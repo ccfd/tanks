@@ -38,7 +38,22 @@ App::App(const Strings& arg) : back(resources.back) {
 			if (it == arg.end()) throw "No fps provided after -fps";
 			fps = std::atof(it->c_str());
 		} else {
-			playerNames.push_back(*it);
+			int number;
+			std::string name;
+			int pos = it->find_first_of(':');
+			if (pos == std::string::npos) {
+				name = *it;
+				number = 1;
+			} else {
+				std::string first = it->substr(pos+1);
+				number = std::atof(first.c_str());
+				if (number <= 0) throw "Need at least one tank per player";
+				if (number > 50) throw "Max 50 tanks per player";
+				name = it->substr(0, pos);
+			}
+			printf("Requested %d tanks for %s player\n", number, name.c_str());
+			playerNames.push_back(name);
+			playerTanks.resize(number);
 		}
 	}
 	sf::ContextSettings settings;

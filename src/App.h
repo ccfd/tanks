@@ -17,6 +17,7 @@ private:
 	Objects bullets;
 	sf::Sound hit;
 	Strings playerNames;
+	std::vector<Objects> playerTanks;
 	bool fullScreen;
 	bool mute;
 	bool graphics, extents;
