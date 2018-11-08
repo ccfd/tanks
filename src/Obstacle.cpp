@@ -9,8 +9,8 @@ Obstacle::~Obstacle(){
 
 };
 
-void Obstacle::Draw(App*,sf::RenderWindow* window) {
-
+void Obstacle::Draw(App* app,sf::RenderWindow* window) {
+	app->DrawPoly(poly,color);
 };
 
 void Obstacle::Tick(App* app) {

@@ -1,7 +1,7 @@
 #include "Globals.h"
 #include "Resources.h"
 
-Resources::Resources() {
+Resources::Resources() : pencolor(28, 54, 144) {
 	if (!back.loadFromFile("media/back.jpg")) err("media/back.jpg not found");
 	if (!head.loadFromFile("media/head.png")) err("media/head.png not found");
 	if (!hole.loadFromFile("media/hole.png")) err("media/hole.png not found");

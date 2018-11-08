@@ -18,14 +18,13 @@ TankAvatar::TankAvatar () :
 	shot.setBuffer(resources.shotbuffer);
 	this->setPosition(600,600,0,0,0,1);
 	engine.play();
-	sf::Color lifecolor(28, 54, 144);
-	lifeStatus.setFillColor(lifecolor);
+	lifeStatus.setFillColor(resources.pencolor);
 	lifeFrame.setOutlineThickness(1);
-	lifeFrame.setOutlineColor(lifecolor);
+	lifeFrame.setOutlineColor(resources.pencolor);
 	lifeFrame.setFillColor(sf::Color::Transparent);
 	tankName.setFont(resources.bold);
 	tankName.setCharacterSize(10);
-        tankName.setColor(lifecolor);
+        tankName.setColor(resources.pencolor);
         setName("unknown");
 }
 

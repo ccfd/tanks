@@ -95,14 +95,15 @@ App::App(const Strings& arg) : back(resources.back) {
 		Obstacle * obst;
 		for (int i = 0; i < 20; i++) {
 			Polygon poly;
-			double x = (600.0*rand()/RAND_MAX + 660)*gscale;
-			double y = (600.0*rand()/RAND_MAX + 240)*gscale;
-			poly.push_back(Point(x+20,y+20));
-			poly.push_back(Point(x+20,y-20));
-			poly.push_back(Point(x-20,y-20));
-			poly.push_back(Point(x-20,y+20));
+			double x = (1100.0*rand()/RAND_MAX + 360)*gscale;
+			double y = (800.0*rand()/RAND_MAX + 140)*gscale;
+			double a = 3.14*rand()/RAND_MAX;
+			poly.push_back(Point(x+20*cos(a),y+20*sin(a)));
+			poly.push_back(Point(x+20*sin(a),y-20*cos(a)));
+			poly.push_back(Point(x-20*cos(a),y-20*sin(a)));
+			poly.push_back(Point(x-20*sin(a),y+20*cos(a)));
 			poly.tag = TAG_OBSTACLE;
-			obst = new Obstacle(poly);
+			obst = new Obstacle(poly,sf::Color(125, 32, 54));
 			if (GetCollision(obst).size() == 0) {
 				objects.push_back(obst);
 				break;

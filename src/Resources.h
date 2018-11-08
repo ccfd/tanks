@@ -9,6 +9,7 @@ struct Resources {
 	sf::Texture back, head, body, hole;
 	sf::SoundBuffer shotbuffer, hitbuffer;
 	sf::Font regular, bold, italic;
+	sf::Color pencolor;
 	Resources();
 };
 
