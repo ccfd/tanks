@@ -4,11 +4,21 @@
 #include "Object.h"
 #include "GeometryTools.h"
 #include <list>
+#include "Player.h"
 
 class App {
 public:
 	typedef std::list<Object*> Objects;
+	typedef std::list<LiveTank*> Tanks;
 	typedef std::vector<std::string> Strings;
+	struct AppPlayer {
+		std::string name;
+		int numberOfTanks;
+		Player * player;
+		Tanks tanks;
+		inline AppPlayer(const std::string& name_, int number) : name(name_), numberOfTanks(number) {};
+	};
+	typedef std::vector<AppPlayer> AppPlayers;	
 private:
 	sf::RenderWindow* window;
 	sf::Sprite back;
@@ -16,8 +26,7 @@ private:
 	Objects objects;
 	Objects bullets;
 	sf::Sound hit;
-	Strings playerNames;
-	std::vector<Objects> playerTanks;
+	AppPlayers players;
 	bool fullScreen;
 	bool mute;
 	bool graphics, extents;

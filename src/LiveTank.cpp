@@ -6,7 +6,7 @@
 #include "TankControl.h"
 
 
-LiveTank::LiveTank (Player *player_, double x_, double y_, double rb_, double rh_, const std::string & name_) : Object(TAG_PLAYER), player(player_), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
+LiveTank::LiveTank (double x_, double y_, double rb_, double rh_, const std::string & name_) : Object(TAG_PLAYER), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
 	rc = 0;
 	gunAmmunition = 1000;
 	cannonAmmunition = 10;
@@ -54,25 +54,26 @@ void LiveTank::DrawExtents(App* app,sf::RenderWindow* window) {
 	if (! dead) avatar.DrawInfo(window);
 };
 
-void LiveTank::Tick(App* app) {
-	t += dt;
-	if (dead) return;
-	TankControl control;
+TankControl& LiveTank::getControl(App* app) {
 	control.azimuth = rh;
 	control.cannonAmmunition = cannonAmmunition;
 	control.gunAmmunition = gunAmmunition;
 	control.cannonAngle = rc;
 	bool canShootCannon = (cannonAmmunition > 0) && (t - lastCannonShot > cannonInterval);
-	control.canShootCannon = canShootCannon;
 	bool canShootGun = (gunAmmunition > 0) && (t - lastGunShot > gunInterval);
+	control.canShootCannon = canShootCannon;
 	control.canShootGun = canShootGun;
 	control.headAngle = rh - rb;
 	
 	FillSights(control.sights,app);
-	
-	// Control
-	player->Play(t, &control);
+	return control;
+};
 
+void LiveTank::Tick(App* app) {
+	t += dt;
+	if (dead) return;
+	bool canShootCannon = (cannonAmmunition > 0) && (t - lastCannonShot > cannonInterval);
+	bool canShootGun = (gunAmmunition > 0) && (t - lastGunShot > gunInterval);
 	double v1=0, v2=0, omh = 1;
 	v1 = control.left;
 	if (v1 >  25) v1 =  25;

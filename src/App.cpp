@@ -52,8 +52,7 @@ App::App(const Strings& arg) : back(resources.back) {
 				name = it->substr(0, pos);
 			}
 			printf("Requested %d tanks for %s player\n", number, name.c_str());
-			playerNames.push_back(name);
-			playerTanks.resize(number);
+			players.push_back(AppPlayer(name, number));
 		}
 	}
 	sf::ContextSettings settings;
@@ -68,20 +67,26 @@ App::App(const Strings& arg) : back(resources.back) {
 	if (mute) sf::Listener::setGlobalVolume(0.0);
 	back.scale(gscale,gscale);
 	hit.setBuffer(resources.hitbuffer);
-	if (playerNames.size() < 2) playerNames.push_back("KeyboardPlayer");
-	if (playerNames.size() < 2) playerNames.push_back("SimpleBot");
-	Player * player;
+	if (players.size() < 2) players.push_back(AppPlayer("KeyboardPlayer",1));
+	if (players.size() < 2) players.push_back(AppPlayer("SimpleBot",1));
+	int totalTanks = 0;
+	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) totalTanks += it->numberOfTanks;
 	int tankNumber = 0;
 	const double pi = atan(1.0)*4;
-	double tankAngle = 2*pi/playerNames.size();
-	for (Strings::iterator it = playerNames.begin(); it != playerNames.end(); it++) {
-		player = PlayerFactory::Produce(*it);
-		printf("Adding player: %s\n",it->c_str());
-		if (player == NULL) err("Player not found");
-		double a = tankAngle * tankNumber + 0.5*tankAngle*rand()/RAND_MAX;
-		double rb = 2*pi*rand()/RAND_MAX;
-		objects.push_back(new LiveTank(player, gscale*(960+cos(a)*400),gscale*(540+sin(a)*400),rb,rb, *it));
-		tankNumber++;
+	double tankAngle = 2*pi/totalTanks;
+	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) {
+		it->player = PlayerFactory::Produce(it->name);
+		printf("Adding player: %s\n",it->name.c_str());
+		if (it->player == NULL) err("Player not found");
+		for (int i = 0; i < it->numberOfTanks; i++) {
+			printf("Adding tank player: %s\n",it->name.c_str());
+			double a = tankAngle * tankNumber + 0.5*tankAngle*rand()/RAND_MAX;
+			double rb = 2*pi*rand()/RAND_MAX;
+			LiveTank * tank = new LiveTank(gscale*(960+cos(a)*400),gscale*(540+sin(a)*400),rb,rb, it->name);
+			objects.push_back(tank);
+			it->tanks.push_back(tank);
+			tankNumber++;
+		}
 	}
 	{
 		Polygon poly;
@@ -273,6 +278,11 @@ void Clear(App::Objects& objects) {
 }
 
 void App::Tick() {
+	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) {
+		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
+			it->player->Play(Time,&((*t)->getControl(this)));
+		}
+	}
 	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Tick(this);
 	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Tick(this);
 	Clear(objects);
