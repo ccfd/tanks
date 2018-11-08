@@ -14,6 +14,7 @@ LiveTank::LiveTank (Player *player_, double x_, double y_, double rb_, double rh
 	lastGunShot = prepTime;
 	HP = 100;
 	avatar.setName(name_);
+	dead = false;
 }
 
 LiveTank::~LiveTank() {};
@@ -22,13 +23,18 @@ void LiveTank::Hit(double hp) {
 	HP -= hp;
 	if (HP <= 0) {
 		HP = 0;
-		Dissapear();
+		Die();
 	}
 }
 
+void LiveTank::Die() {
+	dead = true;
+	Tag() = TAG_OBSTACLE;
+};
+
 void LiveTank::Draw(App* app,sf::RenderWindow* window) {
 	avatar.Draw(window);
-	avatar.DrawInfo(window);
+	if (! dead) avatar.DrawInfo(window);
 };
 
 void LiveTank::FillSights(Sights & sights, App* app, bool draw) {
@@ -45,11 +51,12 @@ void LiveTank::DrawExtents(App* app,sf::RenderWindow* window) {
 	Object::DrawExtents(app,window);
 	TankControl control;
 	FillSights(control.sights,app,true);
-	avatar.DrawInfo(window);
+	if (! dead) avatar.DrawInfo(window);
 };
 
 void LiveTank::Tick(App* app) {
 	t += dt;
+	if (dead) return;
 	TankControl control;
 	control.azimuth = rh;
 	control.cannonAmmunition = cannonAmmunition;

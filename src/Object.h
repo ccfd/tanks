@@ -16,6 +16,6 @@ public:
 	virtual Polygon Extent() = 0;
 	virtual void Hit(double);
 	virtual void Dissapear();
-	inline const tag_t& Tag() { return tag; };
+	inline tag_t& Tag() { return tag; };
 	inline bool IsAlive() { return live; }
 };

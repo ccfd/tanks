@@ -13,6 +13,8 @@ class LiveTank : public Object {
 	void FillSights(Sights & sights, App* app, bool draw = false);
 	Player* player;
 	double HP;
+	bool dead;
+	void Die();
 public:
 	LiveTank (Player *player_, double x_, double y_, double rb_, double rh_, const std::string & name_);
 	~LiveTank ();
