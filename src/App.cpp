@@ -167,6 +167,19 @@ void App::DrawExtents() {
 	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->DrawExtents(this,window);
 }
 
+void App::DrawPoly(const Polygon& ext, const sf::Color& color) {
+		std::vector<sf::Vertex> sfPoly;
+		for (Polygon::const_iterator p = ext.begin(); p != ext.end(); p++) {
+			sfPoly.push_back(sf::Vertex(*p, color));
+		}
+		{
+			Polygon::const_iterator p = ext.begin();
+			sfPoly.push_back(sf::Vertex(*p, color));
+		}
+		window->draw(&sfPoly[0], sfPoly.size(), sf::LinesStrip);
+}
+
+
 void App::AddObject(Object * obj) {
 	objects.push_back(obj);
 }

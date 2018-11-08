@@ -6,7 +6,7 @@
 #include <string>
 
 struct Resources {
-	sf::Texture back, head, body;
+	sf::Texture back, head, body, hole;
 	sf::SoundBuffer shotbuffer, hitbuffer;
 	sf::Font regular, bold, italic;
 	Resources();

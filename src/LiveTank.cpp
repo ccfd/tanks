@@ -20,7 +20,6 @@ LiveTank::~LiveTank() {};
 
 void LiveTank::Hit(double hp) {
 	HP -= hp;
-	printf("I was hit by: %lf hp\n", hp);
 	if (HP <= 0) {
 		HP = 0;
 		Dissapear();

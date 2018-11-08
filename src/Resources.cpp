@@ -4,6 +4,7 @@
 Resources::Resources() {
 	if (!back.loadFromFile("media/back.jpg")) err("media/back.jpg not found");
 	if (!head.loadFromFile("media/head.png")) err("media/head.png not found");
+	if (!hole.loadFromFile("media/hole.png")) err("media/hole.png not found");
 	if (!body.loadFromFile("media/body.png")) err("media/body.png not found");
 	back.setSmooth(true);
 	head.setSmooth(true);

@@ -27,6 +27,7 @@ public:
 	App(const Strings&);
 	void Draw();
 	void DrawExtents();
+	void DrawPoly(const Polygon&, const sf::Color&);
 	void Tick();
 	int Run();
 	void AddObject(Object*);
