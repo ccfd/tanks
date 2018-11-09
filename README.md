@@ -14,7 +14,10 @@ You can edit out the `src/Bot/BotPlayer.cpp` to develop your AI player.
 
 ### Compilation and Running
 
-Under **Linux** you should be able to use `make`, and run the game with `./main`.
+Under **Linux** you should be able to use `make`, and run the game with `./main`. 
+Remember to install dependencies by typing in terminal:
+`sudo apt install libsfml-dev`
+
 In **Windows** you can open the Visual Studio project.
 The game has some commandline options:
 
