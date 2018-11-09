@@ -24,5 +24,6 @@ public:
 	virtual Polygon Extent();
 	virtual void Hit(double);
 	TankControl& getControl(App* app);
-	inline double getHP() { return HP; };
+	inline double getHP() const { return HP; };
+	inline bool isDead() const { return dead; };
 };

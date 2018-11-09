@@ -11,8 +11,7 @@ void err(const std::string& msg);
 
 typedef unsigned int tag_t;
 #define TAG_UNKNOWN 1
-#define TAG_PLAYER 2
-#define TAG_MAXPLAYER 30
-#define TAG_OBSTACLE 30
-#define TAG_FOOD 31
-
+#define TAG_ENEMY 2
+#define TAG_ALLY 3
+#define TAG_OBSTACLE 4
+#define TAG_FOOD 5

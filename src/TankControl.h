@@ -30,6 +30,7 @@ public:
 	static const int resolution;
 	static const double alpha;
 	TankControl();
+	void Init();
 	bool CanShootGun();
 	void ShootGun();
 	bool CanShootCannon();

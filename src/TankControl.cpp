@@ -10,6 +10,10 @@ Sights::Sights() : std::vector< Pixel >(resolution) {
 };
 
 TankControl::TankControl() {
+	Init();
+}
+
+void TankControl::Init() {
 	canShootGun = false;
 	canShootCannon = false;
 	wannaShootGun = false;

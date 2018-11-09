@@ -83,6 +83,7 @@ App::App(const Strings& arg) : back(resources.back) {
 			double a = tankAngle * tankNumber + 0.5*tankAngle*rand()/RAND_MAX;
 			double rb = 2*pi*rand()/RAND_MAX;
 			LiveTank * tank = new LiveTank(gscale*(960+cos(a)*400),gscale*(540+sin(a)*400),rb,rb, it->name);
+			tank->Tag() = TAG_ENEMY;
 			objects.push_back(tank);
 			it->tanks.push_back(tank);
 			tankNumber++;
@@ -280,7 +281,13 @@ void Clear(App::Objects& objects) {
 void App::Tick() {
 	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) {
 		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
+			if (! (*t)->isDead()) (*t)->Tag() = TAG_ALLY;
+		}
+		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
 			it->player->Play(Time,&((*t)->getControl(this)));
+		}
+		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
+			if (! (*t)->isDead()) (*t)->Tag() = TAG_ENEMY;
 		}
 	}
 	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Tick(this);

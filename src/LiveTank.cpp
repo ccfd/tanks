@@ -6,7 +6,7 @@
 #include "TankControl.h"
 
 
-LiveTank::LiveTank (double x_, double y_, double rb_, double rh_, const std::string & name_) : Object(TAG_PLAYER), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
+LiveTank::LiveTank (double x_, double y_, double rb_, double rh_, const std::string & name_) : Object(TAG_UNKNOWN), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
 	rc = 0;
 	gunAmmunition = 1000;
 	cannonAmmunition = 10;
@@ -55,6 +55,7 @@ void LiveTank::DrawExtents(App* app,sf::RenderWindow* window) {
 };
 
 TankControl& LiveTank::getControl(App* app) {
+	control.Init();
 	control.azimuth = rh;
 	control.cannonAmmunition = cannonAmmunition;
 	control.gunAmmunition = gunAmmunition;
