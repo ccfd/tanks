@@ -26,6 +26,7 @@ App::App(const Strings& arg) : back(resources.back) {
 		} else if (*it == "-x") {
 			extents = true;
 			graphics = false;
+			resources.pencolor = sf::Color::White;
 		} else if (*it == "-t") {
 			it++;
 			if (it == arg.end()) throw "No time provided after -t";
@@ -163,7 +164,7 @@ void App::DrawCountdown(double t, const std::string& final) {
 	clockText.setScale(w,w);
 	sf::FloatRect bounds = clockText.getLocalBounds();
 	clockText.setOrigin(bounds.width/2,bounds.height);
-	clockText.setColor(sf::Color(0, 0, 128, 255*(1-w)));
+	clockText.setColor(resources.pencolor * sf::Color(255, 255, 255, 255*(1-w)));
 	window->draw(clockText);
 }
 
@@ -173,7 +174,7 @@ void App::DrawClock(double t) {
 		clockText.setCharacterSize(24);
 		clockText.setScale(1,1);
 		clockText.setOrigin(0,0);
-		clockText.setColor(sf::Color(0, 0, 128, 128));
+		clockText.setColor(resources.pencolor * sf::Color(255, 255, 255, 200));
 		clockText.setPosition(160,670);
 	}
 	char str[256];
@@ -189,7 +190,9 @@ void App::Draw() {
 	window->draw(back);
 	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Draw(this,window);
 	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Draw(this,window);
+}
 
+void App::DrawInfo() {
 	if (Time < prepTime + 1) {
 		DrawCountdown( prepTime + 1 - Time, "START" );
 	} else if (Time > timeLimit - 4) {
@@ -325,6 +328,7 @@ int App::Run() {
 		window->clear();
 		if (graphics) this->Draw();
 		if (extents) this->DrawExtents();
+		this->DrawInfo();
 		window->display();
 		if (Time > timeLimit) window->close();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) window->close();

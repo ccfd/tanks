@@ -29,7 +29,7 @@ void LiveTank::Hit(double hp) {
 
 void LiveTank::Die() {
 	dead = true;
-	Tag() = TAG_OBSTACLE;
+	Tag() = TAG_DEADTANK;
 };
 
 void LiveTank::Draw(App* app,sf::RenderWindow* window) {

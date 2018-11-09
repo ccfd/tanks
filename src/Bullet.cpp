@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include "App.h"
 
-Bullet::Bullet (double x_, double y_, double vx_, double vy_, double r_, double hp_): x(x_), y(y_), vx(vx_), vy(vy_), r(r_), circle(r), hp(hp_) {
+Bullet::Bullet (double x_, double y_, double vx_, double vy_, double r_, double hp_): Object(TAG_BULLET), x(x_), y(y_), vx(vx_), vy(vy_), r(r_), circle(r), hp(hp_) {
 	circle.setFillColor(sf::Color(0, 0, 0));
 	circle.setOrigin(r,r);
 };

@@ -2,7 +2,7 @@
 #include "../Player.h"
 #include <string>
 
-namespace SimpleBot {
+namespace MyNamespace {
 
 class BotPlayer : public Player {
 public:

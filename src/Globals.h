@@ -13,5 +13,7 @@ typedef unsigned int tag_t;
 #define TAG_UNKNOWN 1
 #define TAG_ENEMY 2
 #define TAG_ALLY 3
-#define TAG_OBSTACLE 4
-#define TAG_FOOD 5
+#define TAG_DEADTANK 4
+#define TAG_OBSTACLE 5
+#define TAG_FOOD 6
+#define TAG_BULLET 7

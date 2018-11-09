@@ -18,28 +18,11 @@ void Object::DrawExtents(App* app, sf::RenderWindow* window) {
 		Polygon ext = this->Extent();
 		std::vector<sf::Vertex> sfPoly;
 		sf::Color color(0, 255, 0);
-		int count = app->GetCollision(this).size();
-		if (count == 1) {
-			color = sf::Color(255, 0, 0);
-		}
-		if (count == 2) {
-			color = sf::Color(255, 255, 0);
-		}
-		if (count == 3) {
-			color = sf::Color(0, 255, 255);
-		}
-		if (count == 4) {
-			color = sf::Color(0, 0, 255);
-		}
-		for (Polygon::iterator p = ext.begin(); p != ext.end(); p++) {
-			sfPoly.push_back(sf::Vertex(*p, color));
-		}
-		{
-			Polygon::iterator p = ext.begin();
-			sfPoly.push_back(sf::Vertex(*p, color));
-		}
-		window->draw(&sfPoly[0], sfPoly.size(), sf::LinesStrip);
-
+		if (Tag() == TAG_OBSTACLE) color = sf::Color(255, 0, 0);
+		if (Tag() == TAG_ENEMY)    color = sf::Color(255, 255, 0);
+		if (Tag() == TAG_DEADTANK)   color = sf::Color(255, 100, 100);
+		if (Tag() == TAG_BULLET)   color = sf::Color(0, 255, 255);
+		app->DrawPoly( ext, color );
 }
 
 

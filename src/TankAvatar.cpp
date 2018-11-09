@@ -11,8 +11,6 @@ TankAvatar::TankAvatar () :
 	body.setOrigin(72*0.5,72*0.5);
 	head.scale(gscale,gscale);
 	body.scale(gscale,gscale);
-	//		head.setColor(sf::Color(128, 255, 128));
-	//		body.setColor(sf::Color(128, 255, 128));
 	if (!engine.openFromFile("media/sherman_e8.ogg")) err("media/sherman_e8.ogg not found"); // error
 	engine.setLoop(true);
 	shot.setBuffer(resources.shotbuffer);
