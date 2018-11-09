@@ -10,7 +10,7 @@ There will be an online tournament of the created bots.
 Participation is restricted to the students of [MEiL PW](https://meil.pw.edu.pl/) for now.
 To participate you have to scan a QR code on the corridor of the faculty.
 After scaning the code you will have your private copy of repository.
-You can edit out the `Bot/BotPlayer.cpp` to develop your AI player.
+You can edit out the `src/Bot/BotPlayer.cpp` to develop your AI player.
 
 ### Compilation and Running
 
@@ -29,7 +29,7 @@ The game has some commandline options:
 
 ### How we include your bot
 Your repository will be cloned (every some time).
-We then run preliminary tests, and if your repo is working, we copy your `Bot/...` files.
+We then run preliminary tests, and if your repo is working, we copy your `src/Bot/...` files.
 Then we replace the name of the namespace `MyNamespace` (so that there will not be conflicts with other bots), and player name `SimpleBot`.
 This will be done just as text replacement, so remember not to mess with these.
 
