@@ -15,6 +15,7 @@ App::App(const Strings& arg) : back(resources.back) {
 	graphics = true;
 	extents = false;
 	int obstacles=0;
+	clockType = 0;
 	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++) {
 		if (*it == "-f") {
 			fullScreen = true;
@@ -140,47 +141,61 @@ App::App(const Strings& arg) : back(resources.back) {
 	clockText.setPosition(sf::Vector2f(640,360));
 }
 
+void App::DrawCountdown(double t, const std::string& final) {
+	if (clockType != 1) {
+		clockType = 1;
+		clockText.setCharacterSize(24*5); // in pixels, not points!
+		clockText.setScale(0.2,0.2);
+		clockText.setColor(sf::Color::Blue);
+		clockText.setStyle(sf::Text::Bold);
+		clockText.setPosition(sf::Vector2f(640,360));
+	}		
+	char str[256];
+	double it = floor(t);
+	double w = t - it;
+	w = 1.0*(1-w) + 0.2*w;
+	if (it > 0.0) {		
+		sprintf(str, "%.0f", it);
+		clockText.setString(str);
+	} else {
+		clockText.setString(final);
+	}
+	clockText.setScale(w,w);
+	sf::FloatRect bounds = clockText.getLocalBounds();
+	clockText.setOrigin(bounds.width/2,bounds.height);
+	clockText.setColor(sf::Color(0, 0, 128, 255*(1-w)));
+	window->draw(clockText);
+}
+
+void App::DrawClock(double t) {
+	if (clockType != 2) {
+		clockType = 2;
+		clockText.setCharacterSize(24);
+		clockText.setScale(1,1);
+		clockText.setOrigin(0,0);
+		clockText.setColor(sf::Color(0, 0, 128, 128));
+		clockText.setPosition(160,670);
+	}
+	char str[256];
+	double it = floor(t);
+	double mt = floor(t/60);
+	double st = it - mt*60;
+	sprintf(str, "Time left: %.0f:%02.0f", mt, st);
+	clockText.setString(str);
+	window->draw(clockText);
+}
+
 void App::Draw() {
 	window->draw(back);
 	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Draw(this,window);
 	for (Objects::iterator t = bullets.begin(); t != bullets.end(); t++) (*t)->Draw(this,window);
+
 	if (Time < prepTime + 1) {
-		char str[256];
-		double t = prepTime + 1 - Time;
-		double it = floor(t);
-		double w = t - it;
-		w = 1.0*(1-w) + 0.2*w;
-		if (it > 0.0) {		
-			sprintf(str, "%.0f", it);
-			clockText.setString(str);
-		} else {
-			clockText.setString("START");
-		}
-		clockText.setScale(w,w);
-		sf::FloatRect bounds = clockText.getLocalBounds();
-		clockText.setOrigin(bounds.width/2,bounds.height);
-		sf::Color color(0, 0, 128, 255*(1-w));
-		clockText.setColor(color);
-		window->draw(clockText);
+		DrawCountdown( prepTime + 1 - Time, "START" );
+	} else if (Time > timeLimit - 4) {
+		DrawCountdown(timeLimit - Time, "END" );
 	} else if (timeLimit - Time < 1200) {
-		static bool first = true;
-		if (first) {
-			clockText.setCharacterSize(24);
-			clockText.setScale(1,1);
-			clockText.setOrigin(0,0);
-			sf::Color color(0, 0, 128, 128);
-			clockText.setColor(color);
-			clockText.setPosition(160,670);
-			first = false;
-		}
-		char str[256];
-		double t = timeLimit - Time;
-		double it = floor(t);
-		double mt = floor(t/60);
-		double st = it - mt*60;
-		sprintf(str, "Time left: %.0f:%02.0f", mt, st);
-		clockText.setString(str);
-		window->draw(clockText);
+		DrawClock(timeLimit - Time);
 	}
 }
 
@@ -317,16 +332,18 @@ int App::Run() {
 		for (AppPlayers::iterator it = players.begin(); it != players.end(); it++)
 			for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++)
 				if ( (*t)->getHP() > 0 ) { alive++; break; }
-		if (alive < 2) window->close();
+		if (alive < 2) {
+			if (Time <= timeLimit - 4) Time = timeLimit - 4;
+		}
 	}
-	printf("Results:\n");
-	printf("player points\n");
+	printf("Results:");
 	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) {
 		double points = 0;
 		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
 			points += (*t)->getHP();
 		}
-		printf("%s : %.0lf\n", it->name.c_str(), points);
+		printf(" (%s : %.0lf)", it->name.c_str(), points);
 	}
+	printf("\n");
 	return EXIT_SUCCESS;
 }

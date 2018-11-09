@@ -33,6 +33,9 @@ private:
 	double timeLimit;
 	double fps;
 	double Time;
+	int clockType;
+	void DrawCountdown(double t, const std::string& final);
+	void DrawClock(double t);
 public:
 	App(const Strings&);
 	void Draw();
