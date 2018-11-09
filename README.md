@@ -1,16 +1,8 @@
 # Tanks!
 
-A game like no other.
-
-**This game is not yet operational**
-
 ## The premise
 
-This is a simple game in which you have a tank, and you have to kill everybody. The idea of the game is that you have to write a C++ class, which will control the tank.
-
-### How to write your own bot
-
-First fork the repository. Then clone it to your machine. Open the program in either Visual Studio in Windows, or any sane editor in Linux. Add your bot in `src/AwesomeBot/AwesomeBot.cpp` and `src/AwesomeBot/AwesomeBot.cpp`. You can copy the SimpleBot as an example. **Please use a separate C++ namespace for your bot**
+This is a simple game in which you have a tank, and you have to **kill everybody**. The idea of the game is that you have to write a C++ class, which will control the tank. And **kill everybody**.
 
 ## Tournament
 
@@ -18,28 +10,32 @@ There will be an online tournament of the created bots.
 
 ### How to participate
 
-To participate in the tournament your code have to be made according to some rules:
-- Cannot base on any modification of the main code
-- Have to be placed in the directory `src/name/` where `name` is your GitHub login
-- All things written have to be done in a separate namespace `name` (the same GitHub login)
-- Your Bot code cannot use SFML library or any external input
+Participation is restricted to the students of [MEiL PW](https://meil.pw.edu.pl/) for now.
+To participate you have to scan a QR code on the corridor of the faculty.
+After scaning the code you will have your private copy of repository.
+You can edit out the `Bot/BotPlayer.cpp` to develop your AI player.
 
-After your code is made in accordence with the rules, just open a pull request to this repository.
+### How we include your bot
+Your repository will be cloned (every some time).
+We then run preliminary tests, and if your repo is working, we copy your `Bot/...` files.
+Then we replace the name of the namespace `MyNamespace` (so that there will not be conflicts with other bots), and player name `SimpleBot`.
+This will be done just as text replacement, so remember not to mess with these.
 
 ### Hacking
 
 Yes. We know you can hack this tournament in 666 ways. Yeah. Good for you. If you want to hack something, hack Putin's girlfriend instagram account. See how it goes. This game is to have fun creating *AI for a Funkin' Tank*, not to deal with wannabe hackers making fork bombs.
 
+## If you cannot participate
+
+If you cannot participate in the tournament, but would like to play with the game, just fork it.
+
 ## Disclaimers
 
-### Author
-
-[Łukasz Łaniewski-Wołłk](https://github.com/llaniewski/)
-
 ### C++ course
-
 This repository is used in a course of C++ at MEiL PW (https://meil.pw.edu.pl/ZA)
 
-### Pictures and sound
+### Author
+[Łukasz Łaniewski-Wołłk](https://github.com/llaniewski/)
 
+### Pictures and sound
 The media used in the game are described [here](media/README.md)
