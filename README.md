@@ -12,13 +12,21 @@ To participate you have to scan a QR code on the corridor of the faculty.
 After scaning the code you will have your private copy of repository.
 You can edit out the `src/Bot/BotPlayer.cpp` to develop your AI player.
 
-### Compilation and Running
+### Compilation
 
 Under **Linux** you should be able to use `make`, and run the game with `./main`. 
-Remember to install dependencies by typing in terminal:
+In **Windows** you can open the Visual Studio project.
+
+### SFML
+
+The game needs the SFML library. In linux you can install it by:
 `sudo apt install libsfml-dev`
 
-In **Windows** you can open the Visual Studio project.
+In Windows the Visual Studio project is set up to search for the SFML library in the project directory.
+You can change the paths (and libs) to fit your installation.
+
+## Running
+
 The game has some commandline options:
 
 - `-f` - full screen mode
