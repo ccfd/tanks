@@ -12,6 +12,21 @@ To participate you have to scan a QR code on the corridor of the faculty.
 After scaning the code you will have your private copy of repository.
 You can edit out the `Bot/BotPlayer.cpp` to develop your AI player.
 
+### Compilation and Running
+
+Under **Linux** you should be able to use `make`, and run the game with `./main`.
+In **Windows** you can open the Visual Studio project.
+The game has some commandline options:
+
+- `-f` - full screen mode
+- `-m` - mute sound
+- `-o nubmer` - number of random obstacles
+- `-e` - display hitboxes
+- `-x` - display only box extents
+- `-t seconds` - set time limit
+- `-fps fps` - fps (default 24)
+- `[bot name]:[number of tanks]` - you can supply the list players (bots) to include in the fight (with number of respective tanks)
+
 ### How we include your bot
 Your repository will be cloned (every some time).
 We then run preliminary tests, and if your repo is working, we copy your `Bot/...` files.
