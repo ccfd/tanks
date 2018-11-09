@@ -3,16 +3,7 @@
 ## The premise
 This is a simple game in which you have a tank, and you have to **kill everybody**. The idea of the game is that you have to write a C++ class, which will control the tank. And **kill everybody**.
 
-## Tournament
-There will be an online tournament of the created bots.
-
-### How to participate
-Participation is restricted to the students of [MEiL PW](https://meil.pw.edu.pl/) for now.
-To participate you have to scan a QR code on the corridor of the faculty.
-After scaning the code you will have your private copy of repository.
-You can edit out the `src/Bot/BotPlayer.cpp` to develop your AI player.
-
-### Compilation
+## Compilation
 
 Under **Linux** you should be able to use `make`, and run the game with `./main`. 
 In **Windows** you can open the Visual Studio project.
@@ -25,7 +16,7 @@ The game needs the SFML library. In linux you can install it by:
 In Windows the Visual Studio project is set up to search for the SFML library in the project directory.
 You can change the paths (and libs) to fit your installation.
 
-## Running
+### Running
 
 The game has some commandline options:
 
@@ -37,6 +28,15 @@ The game has some commandline options:
 - `-t seconds` - set time limit
 - `-fps fps` - fps (default 24)
 - `[bot name]:[number of tanks]` - you can supply the list players (bots) to include in the fight (with number of respective tanks)
+
+## Tournament
+There will be an online tournament of the created bots.
+
+### How to participate
+Participation is restricted to the students of [MEiL PW](https://meil.pw.edu.pl/) for now.
+To participate you have to scan a QR code on the corridor of the faculty.
+After scaning the code you will have your private copy of repository.
+You can edit out the `src/Bot/BotPlayer.cpp` to develop your AI player.
 
 ### How we include your bot
 Your repository will be cloned (every some time).
