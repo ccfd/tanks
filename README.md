@@ -18,6 +18,18 @@ We then run preliminary tests, and if your repo is working, we copy your `Bot/..
 Then we replace the name of the namespace `MyNamespace` (so that there will not be conflicts with other bots), and player name `SimpleBot`.
 This will be done just as text replacement, so remember not to mess with these.
 
+### Update your repo
+As there will be changes happening to the main repository, it is important to update your reposiotory with the original.
+To do it, first add the address of the upstream repo:
+```bash
+git remote add upstream https://github.com/ccfd/tanks.git
+```
+Then you have to fetch the data from the upstream, and merge:
+```bash
+git fetch upstream
+git merge upstream/master
+```
+
 ### Hacking
 Yes.
 We know you can hack this tournament in 666 ways. Yeah. Good for you.
