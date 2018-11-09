@@ -1,4 +1,4 @@
-#include "BotPlayer.h"
+#include "Bot.h"
 #include <math.h>
 
 namespace SimpleBot {
