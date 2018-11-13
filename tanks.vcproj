@@ -181,7 +181,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\Bot\BotPlayer.cpp"
+				RelativePath=".\src\Bot\Bot.cpp"
 				>
 			</File>
 			<File
@@ -247,7 +247,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\Bot\BotPlayer.h"
+				RelativePath=".\src\Bot\Bot.h"
 				>
 			</File>
 			<File
