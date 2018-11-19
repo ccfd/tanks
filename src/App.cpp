@@ -8,6 +8,7 @@
 #include <stdio.h>
 
 App::App(const Strings& arg) : back(resources.back) {
+	Time = 0;
 	fps = 24;
 	fullScreen = false;
 	mute = false;
@@ -322,7 +323,10 @@ int App::Run() {
 		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
+				printf("CLOSE: Window closed\n");
 				window->close();
+			}
 		}
 		this->Tick();
 		window->clear();
@@ -330,8 +334,14 @@ int App::Run() {
 		if (extents) this->DrawExtents();
 		this->DrawInfo();
 		window->display();
-		if (Time > timeLimit) window->close();
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) window->close();
+		if (Time > timeLimit) {
+			printf("CLOSE: Time finished\n");
+			window->close();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+			printf("CLOSE: Escape pressed\n");
+			window->close();
+		}
 		int alive = 0;
 		for (AppPlayers::iterator it = players.begin(); it != players.end(); it++)
 			for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++)
