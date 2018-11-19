@@ -3,7 +3,8 @@ CXXFLAGS += -std=c++0x
 all: main
 
 players.txt : main
-	./main players >$@
+	@test -f "main"
+	@./main players >$@ 2>/dev/null
 
 include dep.mk
 
