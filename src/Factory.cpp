@@ -24,3 +24,12 @@ Player* PlayerFactory::Produce(Key k) {
 void PlayerFactory::Register(Key k, Worker* GPP) {
          Staff()->insert(Pair(k,GPP));
 }
+
+std::vector<std::string> PlayerFactory::List() {
+         std::vector<std::string> ret;
+         Workers* s = Staff();
+         for (Workers::iterator it = s->begin(); it != s->end(); it++) {
+                  ret.push_back(it->first);
+         }
+         return ret;
+}

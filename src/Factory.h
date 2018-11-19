@@ -31,6 +31,7 @@ private:
 public:
         static Player* Produce(Key k);
         static void Register(Key k, Worker* GPP);
+        static std::vector<std::string> List();
 };
 
 template <class P> class RegisterPlayer {

@@ -2,6 +2,9 @@ CXXFLAGS += -std=c++0x
 
 all: main
 
+players.txt : main
+	./main players >$@
+
 include dep.mk
 
 dep.mk : dep.sh src/* src/*/*
