@@ -23,6 +23,7 @@ private:
 	sf::RenderWindow* window;
 	sf::Sprite back;
 	sf::Text clockText;
+	std::list< sf::Text > boardText;
 	Objects objects;
 	Objects bullets;
 	sf::Sound hit;
@@ -36,6 +37,7 @@ private:
 	int clockType;
 	void DrawCountdown(double t, const std::string& final);
 	void DrawClock(double t);
+	void DrawBoard();
 public:
 	App(const Strings&);
 	void Draw();

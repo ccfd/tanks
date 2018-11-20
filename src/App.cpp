@@ -6,6 +6,7 @@
 #include "Factory.h"
 #include <assert.h>
 #include <stdio.h>
+#include <fstream>
 
 App::App(const Strings& arg) : back(resources.back) {
 	Time = 0;
@@ -17,6 +18,7 @@ App::App(const Strings& arg) : back(resources.back) {
 	extents = false;
 	int obstacles=0;
 	clockType = 0;
+	Strings board;
 	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++) {
 		if (*it == "-f") {
 			fullScreen = true;
@@ -36,6 +38,21 @@ App::App(const Strings& arg) : back(resources.back) {
 			it++;
 			if (it == arg.end()) throw "No number provided after -o";
 			obstacles = std::atoi(it->c_str());
+		} else if (*it == "-b") {
+			it++;
+			if (it == arg.end()) throw "No file provided after -b";
+			std::string boardName = *it;
+			std::ifstream boardFile(boardName);
+			if (!boardFile.good()) throw boardName + ": No such file";
+			int i=0;
+			const int k = 3;
+			std::string txt;
+			board.resize(k);
+			while (boardFile >> txt) {
+				board[i] = board[i] + txt + "\n";
+				i = (i+1) % k;
+			}
+			boardFile.close();
 		} else if (*it == "-fps") {
 			it++;
 			if (it == arg.end()) throw "No fps provided after -fps";
@@ -141,6 +158,19 @@ App::App(const Strings& arg) : back(resources.back) {
 	clockText.setColor(sf::Color::Blue);
 	clockText.setStyle(sf::Text::Bold);
 	clockText.setPosition(sf::Vector2f(640,360));
+	double X=20;
+	for (Strings::iterator it=board.begin(); it!=board.end(); it++) {
+		sf::Text bt;
+		bt.setFont(resources.regular);
+		bt.setCharacterSize(12); // in pixels, not points!
+		bt.setColor(resources.pencolor);
+		bt.setStyle(sf::Text::Bold);
+		bt.setPosition(sf::Vector2f(X,30));
+		bt.setString(*it);
+		sf::FloatRect bounds = bt.getLocalBounds();
+		X += bounds.width + 10;
+		boardText.push_back(bt);
+	}
 }
 
 void App::DrawCountdown(double t, const std::string& final) {
@@ -187,6 +217,12 @@ void App::DrawClock(double t) {
 	window->draw(clockText);
 }
 
+void App::DrawBoard() {
+	for (std::list< sf::Text >::iterator it = boardText.begin(); it != boardText.end(); it++) {
+		window->draw(*it);
+	}
+}
+
 void App::Draw() {
 	window->draw(back);
 	for (Objects::iterator t = objects.begin(); t != objects.end(); t++) (*t)->Draw(this,window);
@@ -201,6 +237,7 @@ void App::DrawInfo() {
 	} else if (timeLimit - Time < 1200) {
 		DrawClock(timeLimit - Time);
 	}
+	DrawBoard();
 }
 
 void App::DrawExtents() {
