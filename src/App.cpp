@@ -19,6 +19,7 @@ App::App(const Strings& arg) : back(resources.back) {
 	int obstacles=0;
 	clockType = 0;
 	Strings board;
+	int boardSize;
 	for (Strings::const_iterator it = arg.begin(); it != arg.end(); it++) {
 		if (*it == "-f") {
 			fullScreen = true;
@@ -41,7 +42,16 @@ App::App(const Strings& arg) : back(resources.back) {
 		} else if (*it == "-b") {
 			it++;
 			if (it == arg.end()) throw "No file provided after -b";
-			std::string boardName = *it;
+			std::string boardName;
+			int pos = it->find_first_of(':');
+			if (pos == std::string::npos) {
+				boardSize = 12;
+				boardName = *it;
+			} else {
+				std::string first = it->substr(pos+1);
+				boardSize = std::atof(first.c_str());
+				boardName = it->substr(0, pos);
+			}
 			std::ifstream boardFile(boardName);
 			if (!boardFile.good()) throw boardName + ": No such file";
 			int i=0;
@@ -162,7 +172,7 @@ App::App(const Strings& arg) : back(resources.back) {
 	for (Strings::iterator it=board.begin(); it!=board.end(); it++) {
 		sf::Text bt;
 		bt.setFont(resources.regular);
-		bt.setCharacterSize(12); // in pixels, not points!
+		bt.setCharacterSize(boardSize); // in pixels, not points!
 		bt.setColor(resources.pencolor);
 		bt.setStyle(sf::Text::Bold);
 		bt.setPosition(sf::Vector2f(X,30));
