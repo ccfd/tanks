@@ -4,10 +4,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "TankControl.h"
-#include <cmath>
 
 #if __cplusplus > 199711L
+	#include <cmath>
 	#define isfinite(x__) std::isfinite(x__)
+#else
+	#ifdef _MSC_BUILD
+		#include <float.h>
+		#define isfinite(x__) _finite(x__)
+	#endif
 #endif
 
 LiveTank::LiveTank (double x_, double y_, double rb_, double rh_, const std::string & name_) : Object(TAG_UNKNOWN), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
