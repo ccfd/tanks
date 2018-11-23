@@ -16,6 +16,10 @@ void Player::Play(double time, TankControl* control) {
 
 }
 
+void Player::Result(double myPoints, double otherPoints) {
+
+}
+
 Player::~Player()
 {
 

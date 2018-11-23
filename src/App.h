@@ -16,6 +16,7 @@ public:
 		int numberOfTanks;
 		Player * player;
 		Tanks tanks;
+		double points;
 		inline AppPlayer(const std::string& name_, int number) : name(name_), numberOfTanks(number) {};
 	};
 	typedef std::vector<AppPlayer> AppPlayers;	

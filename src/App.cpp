@@ -400,12 +400,23 @@ int App::Run() {
 		}
 	}
 	printf("Results:");
+	double total_points = 0;
+	double total_tanks = 0;
 	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) {
-		double points = 0;
+		it->points = 0;
 		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
-			points += (*t)->getHP();
+			it->points += (*t)->getHP();
 		}
-		printf(" (%s : %.0lf)", it->name.c_str(), points);
+		total_points += it->points;
+		total_tanks += it->numberOfTanks;
+	}
+	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) {
+		double otherP = (total_points - it->points) / (total_tanks - it->numberOfTanks);
+		double myP = it->points / it->numberOfTanks;
+		it->player->Result(myP, otherP);
+	}
+	for (AppPlayers::iterator it = players.begin(); it != players.end(); it++) {
+		printf(" (%s : %.0lf)", it->name.c_str(), it->points);
 	}
 	printf("\n");
 	return EXIT_SUCCESS;
