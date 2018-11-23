@@ -349,9 +349,11 @@ void App::Tick() {
 		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
 			if (! (*t)->isDead()) (*t)->Tag() = TAG_ALLY;
 		}
+		std::vector<TankControl*> con_vec;
 		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
-			it->player->Play(Time,&((*t)->getControl(this)));
+			con_vec.push_back(&((*t)->getControl(this)));
 		}
+		it->player->PlayAll(Time,con_vec);
 		for (Tanks::iterator t = it->tanks.begin(); t != it->tanks.end(); t++) {
 			if (! (*t)->isDead()) (*t)->Tag() = TAG_ENEMY;
 		}
