@@ -77,15 +77,15 @@ void LiveTank::Tick(App* app) {
 	bool canShootGun = (gunAmmunition > 0) && (t - lastGunShot > gunInterval);
 	double v1=0, v2=0, omh = 1;
 	v1 = control.left;
-	if (! isfinite(v1)) v1 = 0;
+	if (! std::isfinite(v1)) v1 = 0;
 	if (v1 >  25) v1 =  25;
 	if (v1 < -25) v1 = -25;
 	v2 = control.right;
-	if (! isfinite(v2)) v2 = 0;
+	if (! std::isfinite(v2)) v2 = 0;
 	if (v2 >  25) v2 =  25;
 	if (v2 < -25) v2 = -25;
 	omh = control.turn;
-	if (! isfinite(omh)) omh = 0;
+	if (! std::isfinite(omh)) omh = 0;
 	if (omh >  1) omh =  1;
 	if (omh < -1) omh = -1;
 
