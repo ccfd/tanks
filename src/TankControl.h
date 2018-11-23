@@ -26,6 +26,7 @@ class TankControl
 	int cannonAmmunition, gunAmmunition;
 	double left, right, turn, lift;
 	double headAngle, cannonAngle,azimuth;
+	double hp;
 public:
 	static const int resolution;
 	static const double alpha;
@@ -41,6 +42,7 @@ public:
 	double GetCannonAngle();
 	int GetCannonAmmunition();
 	int GetGunAmmunition();
+	double GetHP();
 	~TankControl();
 	Sights sights;
 };

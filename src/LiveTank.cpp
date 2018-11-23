@@ -74,7 +74,8 @@ TankControl& LiveTank::getControl(App* app) {
 	control.canShootCannon = canShootCannon;
 	control.canShootGun = canShootGun;
 	control.headAngle = rh - rb;
-	
+	control.hp = this->HP;
+
 	FillSights(control.sights,app);
 	return control;
 };

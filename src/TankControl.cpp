@@ -64,6 +64,10 @@ int TankControl::GetGunAmmunition() {
 	return gunAmmunition;
 }
 
+double TankControl::GetHP() {
+	return hp;
+}
+
 TankControl::~TankControl(void)
 {
 
