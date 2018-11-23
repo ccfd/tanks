@@ -4,7 +4,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "TankControl.h"
+#include <cmath>
 
+#if __cplusplus > 199711L
+	#define isfinite(x__) std::isfinite(x__)
+#endif
 
 LiveTank::LiveTank (double x_, double y_, double rb_, double rh_, const std::string & name_) : Object(TAG_UNKNOWN), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
 	rc = 0;
@@ -77,15 +81,15 @@ void LiveTank::Tick(App* app) {
 	bool canShootGun = (gunAmmunition > 0) && (t - lastGunShot > gunInterval);
 	double v1=0, v2=0, omh = 1;
 	v1 = control.left;
-	if (! std::isfinite(v1)) v1 = 0;
+	if (! isfinite(v1)) v1 = 0;
 	if (v1 >  25) v1 =  25;
 	if (v1 < -25) v1 = -25;
 	v2 = control.right;
-	if (! std::isfinite(v2)) v2 = 0;
+	if (! isfinite(v2)) v2 = 0;
 	if (v2 >  25) v2 =  25;
 	if (v2 < -25) v2 = -25;
 	omh = control.turn;
-	if (! std::isfinite(omh)) omh = 0;
+	if (! isfinite(omh)) omh = 0;
 	if (omh >  1) omh =  1;
 	if (omh < -1) omh = -1;
 

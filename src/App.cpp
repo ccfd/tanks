@@ -52,7 +52,7 @@ App::App(const Strings& arg) : back(resources.back) {
 				boardSize = std::atof(first.c_str());
 				boardName = it->substr(0, pos);
 			}
-			std::ifstream boardFile(boardName);
+			std::ifstream boardFile(boardName.c_str());
 			if (!boardFile.good()) throw boardName + ": No such file";
 			int i=0;
 			const int k = 3;
