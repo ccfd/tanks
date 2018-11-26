@@ -68,6 +68,10 @@ double TankControl::GetHP() {
 	return hp;
 }
 
+int TankControl::GetID() {
+	return id;
+}
+
 TankControl::~TankControl(void)
 {
 

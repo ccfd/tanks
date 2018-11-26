@@ -15,6 +15,8 @@ class LiveTank : public Object {
 	bool dead;
 	void Die();
 	TankControl control;
+	static int id_counter;
+	int id;
 public:
 	LiveTank (double x_, double y_, double rb_, double rh_, const std::string & name_);
 	~LiveTank ();

@@ -15,6 +15,8 @@
 	#endif
 #endif
 
+int LiveTank::id_counter = 0;
+
 LiveTank::LiveTank (double x_, double y_, double rb_, double rh_, const std::string & name_) : Object(TAG_UNKNOWN), x(x_), y(y_), rb(rb_), rh(rh_), t(0) {
 	rc = 0;
 	gunAmmunition = 1000;
@@ -24,6 +26,8 @@ LiveTank::LiveTank (double x_, double y_, double rb_, double rh_, const std::str
 	HP = 100;
 	avatar.setName(name_);
 	dead = false;
+	id = id_counter;
+	id_counter++;
 }
 
 LiveTank::~LiveTank() {};
@@ -77,6 +81,7 @@ TankControl& LiveTank::getControl(App* app) {
 	control.hp = this->HP;
 
 	FillSights(control.sights,app);
+	control.id = id;
 	return control;
 };
 
