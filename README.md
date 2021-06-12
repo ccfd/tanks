@@ -22,7 +22,7 @@ The game has some commandline options:
 
 - `-f` - full screen mode
 - `-m` - mute sound
-- `-o nubmer` - number of random obstacles
+- `-o number` - number of random obstacles
 - `-e` - display hitboxes
 - `-x` - display only box extents
 - `-t seconds` - set time limit
